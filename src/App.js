@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import { ThemeProvider } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import LandingPage from "./StaticPages/LandingPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export const light = {
+
+  palette: {
+
+  type: 'light',
+
+  },
 }
 
-export default App;
+export const dark = {
+
+  palette: {
+
+  type: 'dark',
+
+  },
+
+}
+
+class App extends Component {
+  state ={
+    theme:false,
+  }
+  handleTheme = () =>{
+    if (this.state.theme === false) {
+      this.setState({
+        theme:true
+      })
+    } else {
+      this.setState({
+        theme:false
+      })
+    }
+  }
+  
+  render() {
+    return (
+      <ThemeProvider theme={createMuiTheme(this.state.theme ? dark : light)}>
+
+      <div>
+        <div className="App">
+          
+        <LandingPage darkToggle={this.handleTheme}/>
+       
+    </div>
+      </div>
+     
+     
+      </ThemeProvider>
+    )
+  }
+}
+
+export default App
