@@ -62,9 +62,6 @@ const useStyles = makeStyles((theme) => ({
 // The Hide on scroll function
 function HideOnScroll(props) {
     const { children, window } = props;
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
     const trigger = useScrollTrigger({ target: window ? window() : undefined });  
     return (
       <Slide appear={false} direction="down" in={!trigger }>
@@ -83,7 +80,7 @@ export default ({props, children})=> {
     <CssBaseline />
     <HideOnScroll {...props}>
     <div className={classes.grow}>
-         <AppBar>
+         <AppBar color="appBar">
             <Toolbar >
               <ProductNameLogo/>
               <div className={classes.grow} />

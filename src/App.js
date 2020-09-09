@@ -9,7 +9,9 @@ export const light = {
   palette: {
   type: 'light',
   },
-  
+  appBar:{
+    main:"#fff"
+  }
 }
 
 export const dark = {
