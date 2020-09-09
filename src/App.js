@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
-import CssBaseline from "@material-ui/core/CssBaseline";
 import LandingPage from "./StaticPages/LandingPage";
 
 
 export const light = {
-
   palette: {
-
   type: 'light',
-
   },
+  
 }
 
 export const dark = {

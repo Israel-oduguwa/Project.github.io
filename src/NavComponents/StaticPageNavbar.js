@@ -76,9 +76,12 @@ function HideOnScroll(props) {
     children: PropTypes.element.isRequired,
     window: PropTypes.func,
   };
-function NavBar(props){
+
+export default ({props, children})=> {
   const classes = useStyles();
-  return(
+  return (<React.Fragment>
+    <CssBaseline />
+    <HideOnScroll {...props}>
     <div className={classes.grow}>
          <AppBar>
             <Toolbar >
@@ -88,25 +91,17 @@ function NavBar(props){
             </Toolbar>
           </AppBar>
          </div>
-  )
-}
-export default ({props, children})=> ( 
-        <React.Fragment>
-        <CssBaseline />
-        <HideOnScroll {...props}>
-          <NavBar {...props}/>
-        </HideOnScroll>
-        <Toolbar id="back-to-top-anchor"/>
-        <Container style={{width:"100%",overflow:"hidden" }}>
-        <Box my={2}>
+    </HideOnScroll>
+    <Toolbar id="back-to-top-anchor" />
+    <Container style={{ width: "100%", overflow: "hidden" }}>
+      <Box my={2}>
         {children}
-        </Box>       
-        </Container>
-        <ScrollTop {...props}>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
+      </Box>
+    </Container>
+    <ScrollTop {...props}>
+      <Fab color="secondary" size="small" aria-label="scroll back to top">
         <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
-      </React.Fragment>
-   
-)
+      </Fab>
+    </ScrollTop>
+  </React.Fragment>);
+}
