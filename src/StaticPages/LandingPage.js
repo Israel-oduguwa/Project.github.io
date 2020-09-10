@@ -7,8 +7,8 @@ export class LandingPage extends Component {
         const toggle = this.props.darkToggle
         return (
             <div className="LandingPageContainer">
-                <StaticPageNavBar >
-               <button onClick={toggle}></button>
+                <StaticPageNavBar toggleDark={toggle}>
+            
                 </StaticPageNavBar>
             </div>
         )

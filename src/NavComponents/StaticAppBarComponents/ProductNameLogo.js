@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/styles/withStyles";
-
+import Link from 'react-router-dom/Link';
 
 const styles = theme => ({
+  root:{
+    textDecoration:"none!important",
+    color:"black"
+  }
 });
 
  class ProductNameLogo extends Component { 
@@ -12,7 +16,7 @@ const styles = theme => ({
       const { classes } = this.props;
         return (
           <>
-                <Typography className={classes.root} variant="h6" noWrap>
+                <Typography component={Link} to="/" color="inherit" className={classes.root} variant="h6" noWrap>
            Rema Builder
           </Typography>
             </>

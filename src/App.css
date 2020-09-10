@@ -12,3 +12,7 @@ button:focus {
   outline:none!important;
   /* outline: 5px auto -webkit-focus-ring-color; */
 }
+/* NavLinks design */
+.navBarLinks{
+  text-decoration: none!important;
+}

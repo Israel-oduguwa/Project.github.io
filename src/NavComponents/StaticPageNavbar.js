@@ -25,7 +25,11 @@ const useStyles = makeStyles((theme) => ({
     },
     grow:{
       flexGrow: 1,
-    }
+    },
+    NavBar:{ 
+         boxShadow: "none!important"
+    },
+    
   }));
   function ScrollTop(props) {
     const { children, window } = props;
@@ -76,15 +80,16 @@ function HideOnScroll(props) {
 
 export default ({props, children})=> {
   const classes = useStyles();
+  // const dark = this.props.toggleDark
   return (<React.Fragment>
     <CssBaseline />
     <HideOnScroll {...props}>
     <div className={classes.grow}>
-         <AppBar color="appBar">
+         <AppBar className={classes.NavBar} color="appBar">
             <Toolbar >
               <ProductNameLogo/>
               <div className={classes.grow} />
-              <StaticNavbarLinks/>
+              <StaticNavbarLinks  />
             </Toolbar>
           </AppBar>
          </div>

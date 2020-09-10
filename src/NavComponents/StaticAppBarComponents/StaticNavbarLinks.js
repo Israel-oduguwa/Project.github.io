@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import Link from 'react-router-dom/Link';
 import PropTypes from 'prop-types';
 
 const styles = (theme) =>({
@@ -20,30 +21,30 @@ const styles = (theme) =>({
 export class StaticNavbarLinks extends Component {
     render() {
         const {classes} = this.props
+        // const darkModes = this.props.darkMode
         return (
           
                  <div className={classes.navLinks}>
-                 <Typography  variant="body1" noWrap>
+         <Typography className="navBarLinks" component={Link} to="/resume-templates"  variant="body1" color="inherit" noWrap>
            Resume Templates
           </Typography>
-                  <Typography  variant="body1" noWrap>
-           Cv Templates
-          </Typography>
-                  <Typography  variant="body1" noWrap>
+                  
+                  <Typography className="navBarLinks" component={Link} to="/coverletter-templates" variant="body1" color="inherit" noWrap>
            CoverLetter
           </Typography>
-                  <Typography  variant="body1" noWrap>
+                  <Typography className="navBarLinks" component={Link} to="/blog" variant="body1" color="inherit" noWrap>
            Blog
           </Typography>
-                  <Typography  variant="body1" noWrap>
+                  <Typography className="navBarLinks" component={Link} to="/about-us"  variant="body1" color="inherit" noWrap>
            About
           </Typography>
-                  <Typography  variant="body1" noWrap>
+                  <Typography className="navBarLinks" component={Link} to="/register"  variant="body1" color="inherit" noWrap>
            Registar
           </Typography>
-                  <Typography  variant="body1" noWrap>
+                  <Typography className="navBarLinks" component={Link} to="/singIn"  variant="body1" color="inherit" noWrap>
           Signin
           </Typography>
+          {/* <button onClick={darkModes}>DarkMode</button> */}
                  </div>
           
         )
