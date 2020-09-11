@@ -4,10 +4,10 @@ export class LandingPageStep4 extends Component {
     render() {
         return (
             <div>
-                Start the Resume Backend And fill this Latter Start Building the templates.
+                NP
             </div>
         )
     }
 }
 
-export default LandingPageStep4.
+export default LandingPageStep4

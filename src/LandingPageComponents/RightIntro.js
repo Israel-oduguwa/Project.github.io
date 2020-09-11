@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SvgImage from "./undraw_organize_resume_utk5.svg";
-import { Fade, Bounce } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
 
 export class RightIntro extends Component {
     render() {

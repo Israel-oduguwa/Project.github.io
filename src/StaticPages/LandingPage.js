@@ -5,6 +5,7 @@ import TopIntro from "../LandingPageComponents/TopIntro";
 import RightIntro from "../LandingPageComponents/RightIntro";
 import LandingPageStep2 from "../LandingPageComponents/LandingPageStep2";
 import LandingPageStep3 from "../LandingPageComponents/LandingPageStep3";
+import LandingPageStep4 from "../LandingPageComponents/LandingPageStep4";
 
 export class LandingPage extends Component {
     render() {
@@ -30,7 +31,10 @@ export class LandingPage extends Component {
                 <div className="LandingPage2">
                     <LandingPageStep3/>
                 </div>
-                <button onClick={toggle}>Dark Mode</button>
+                <div className="LandingPage2">
+                   <LandingPageStep4/>
+                </div>
+               
                 </StaticPageNavBar>
             </div>
         )

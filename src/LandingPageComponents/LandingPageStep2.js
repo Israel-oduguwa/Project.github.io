@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Svg from "./undraw_hiring_cyhs.svg";
 import Button from '@material-ui/core/Button';
-import { Fade, Bounce } from "react-awesome-reveal"
+import {  Bounce } from "react-awesome-reveal"
 
 export class LandingPageStep2 extends Component {
     render() {
