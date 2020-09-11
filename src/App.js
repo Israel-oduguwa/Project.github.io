@@ -18,18 +18,17 @@ import { BrowserRouter as Router , Route , Switch } from "react-router-dom";
 export const light = {
   palette: {
   type: 'light',
-  },
-  appBar:{
-    main:"#fff"
+ main:{
+  secondary:"#f7588c",
+ }
   }
+ 
 }
 
 export const dark = {
-
   palette: {
   type: 'dark',
   },
-
 }
 
 class App extends Component {
@@ -51,9 +50,9 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={createMuiTheme(this.state.theme ? dark : light)}>
-
       <div>
         <div className="App">
+          <button onClick={this.handleTheme}>DarkMode</button>
           <Router>
             <Switch>
               <Route exact path="/" component={LandingPage} />

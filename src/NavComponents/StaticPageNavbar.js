@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     NavBar:{ 
-         boxShadow: "none!important"
+        //  boxShadow: "none!important",
+        //  backgroundColor:"#fafafa"
     },
     
   }));
@@ -95,7 +96,7 @@ export default ({props, children})=> {
          </div>
     </HideOnScroll>
     <Toolbar id="back-to-top-anchor" />
-    <Container style={{ width: "100%", overflow: "hidden" }}>
+    <Container style={{ width: "100%", marginTop:"5vh", overflow: "hidden" }}>
       <Box my={2}>
         {children}
       </Box>

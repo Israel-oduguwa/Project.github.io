@@ -3,6 +3,9 @@
   margin: 0;
   padding:0,
 }
+body{
+  height:700vh
+}
 /* App container styling */
 .App{
   width: 100%;
@@ -15,4 +18,36 @@ button:focus {
 /* NavLinks design */
 .navBarLinks{
   text-decoration: none!important;
+}
+.LandingPagecontainer{
+  margin-top: 1vh;
+}
+
+/* The image at the top of the Landing Page */
+.introImage{
+  height:90%;
+  width:100%
+}
+/* The MuiDrawer Width set */
+.MuiDrawer-paperAnchorLeft {
+  left: 0;
+  right: auto;
+  width: 74%;
+}
+/* .TestImage */
+.TestImage{
+width:50%;
+}
+.LandingPage2{
+  margin-top: 88px;
+}
+/* LandingPage3 */
+.cards-container{
+  margin-top:30px;
+}
+/* The NavBarDrwer LImit */
+@media only screen and (min-width: 960px){
+  .MenuButton{
+    display:none!important;
+  }
 }

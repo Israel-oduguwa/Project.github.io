@@ -7,7 +7,7 @@ import Link from 'react-router-dom/Link';
 const styles = theme => ({
   root:{
     textDecoration:"none!important",
-    color:"black"
+    // color:"black"
   }
 });
 
