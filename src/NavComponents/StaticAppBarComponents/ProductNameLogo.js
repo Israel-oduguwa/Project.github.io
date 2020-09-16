@@ -17,7 +17,7 @@ const styles = theme => ({
         return (
           <>
                 <Typography component={Link} to="/" color="inherit" className={classes.root} variant="h6" noWrap>
-           Rema Builder
+           Resume Builder
           </Typography>
             </>
         )
