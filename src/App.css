@@ -66,7 +66,6 @@ width:50%;
   box-shadow: 1px 1px 2px #DAD7D7;
   border-radius: 3px;  
   padding:23px 70px;
- 
   height:100%;
 }
 
@@ -162,12 +161,16 @@ width:50%;
   a {
     text-decoration: none;
     color: #000;
-    font-style: italic;
+  
   }
   
   a:hover {
+    /* color: #0056b3; */
     text-decoration: underline;
-    color: #000;
+}
+  a:hover {
+    
+    text-decoration:"none"
   }
   
   .skills {

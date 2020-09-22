@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Fade, Bounce } from "react-awesome-reveal";
-
+import Link from 'react-router-dom/Link';
 
 export class TopIntro extends Component {
     render() {
@@ -20,7 +20,7 @@ export class TopIntro extends Component {
                </Fade>
             <br/>
             <Bounce delay={600}>           
-        <Button variant="contained" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
+        <Button component={Link} to="/resume-templates" variant="contained" size ="large" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
           Create My Resume
         </Button>    
             </Bounce>

@@ -7,7 +7,6 @@ export class RightIntro extends Component {
         return (
             <Fade direction="right" duration={1300} >
             <div>
-                Finish the Illustrayion  by adding finishing touches{ "(for Now Skip)"} 
                <img src={SvgImage} className="introImage" alt="IntroImage"/>
             </div>
             </Fade>

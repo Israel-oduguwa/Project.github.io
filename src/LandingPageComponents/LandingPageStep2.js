@@ -22,7 +22,7 @@ export class LandingPageStep2 extends Component {
                   </div>
                   <br/>
                   <Bounce delay={600}>           
-                    <Button variant="contained" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
+                    <Button size="large" variant="contained" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
                    Choose Templates
                     </Button>    
                   </Bounce>
