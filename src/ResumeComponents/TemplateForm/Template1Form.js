@@ -5,11 +5,12 @@ import Template1 from "../ResumeTemplates/Template1";
 export class Template1Form extends Component {
     state={
         man:"ok",
-        auth:false
+        auth:false,
+        color:"red"
       }
       handleChange = (e) =>{
         this.setState({
-          man:e.target.value
+          [e.target.name]:e.target.value
         })
       }
       show = (e) =>{
@@ -20,21 +21,29 @@ export class Template1Form extends Component {
     render() {
         return (
             <div>
-                   <input onChange={this.handleChange}/>
+                   <input onChange={this.handleChange} name="man" />
+                   <input onChange={this.handleChange} name="color" />
         <ReactToPrint
           trigger={() =><button>Print</button>}
           content={() => this.componentRef}
+        />
+        <ReactToPrint
+          trigger={() =><button>Print2</button>}
+          content={() => this.componentRef2}
         />
         <>
         <button onClick={this.show}>Print</button>
         </>
       {
           this.state.auth ?
-           <div style={{display:"none"}}>
-       <Template1 mans={this.state.man} ref={el => (this.componentRef = el)} />
+           <div>
+       <Template1 mans={this.state} ref={el => (this.componentRef = el)} />
        </div>:
        <p>Yhje</p>
       }
+      <div ref={el  =>(this.componentRef2 = el)}>
+        {this.state.man}
+      </div>
       </div>
           
         )
