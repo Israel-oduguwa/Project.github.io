@@ -10,6 +10,7 @@ import SignIn from "./StaticPages/SignIn";
 import CoverLetterTemplates from "./StaticPages/CoverLetterTemplates";
 import About from "./StaticPages/About";
 import Register from "./StaticPages/Register";
+import ResumeBuilder from "./Dynamic Pages/ResumeBuilder"
 // React router
 import { BrowserRouter as Router , Route , Switch } from "react-router-dom";
 
@@ -61,6 +62,7 @@ class App extends Component {
               <Route exact path="/coverletter-templates" component={CoverLetterTemplates}/>
               <Route exact path="/about-us" component={About}/>
               <Route exact path="/register" component={Register}/>
+              <Route exact path="/resume" component={ResumeBuilder}/>
               <Route exact path="/signIn" component={SignIn}/>
             </Switch>
           </Router>           

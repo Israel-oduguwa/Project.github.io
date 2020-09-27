@@ -12,7 +12,6 @@ import Zoom from '@material-ui/core/Zoom';
 import Slide from '@material-ui/core/Slide';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import StaticNavbarLinks from "./StaticAppBarComponents/StaticNavbarLinks";
-
 // AppBar components
 import ProductNameLogo from "./StaticAppBarComponents/ProductNameLogo";
 
@@ -99,6 +98,63 @@ export default ({props, children})=> {
     <Container style={{ width: "100%", marginTop:"5vh", overflow: "hidden" }}>
       <Box my={2}>
         {children}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </Box>
     </Container>
     <ScrollTop {...props}>

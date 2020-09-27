@@ -31,6 +31,7 @@ export class Template1Form extends Component {
           trigger={() =><button>Print2</button>}
           content={() => this.componentRef2}
         />
+       
         <>
         <button onClick={this.show}>Print</button>
         </>
@@ -44,6 +45,15 @@ export class Template1Form extends Component {
       <div ref={el  =>(this.componentRef2 = el)}>
         {this.state.man}
       </div>
+      <div ref={el  =>(this.componentRef3 = el)}>
+        {this.state.man} jThi is n e
+      </div>
+      <ReactToPrint
+          trigger={() =><div>
+            <h1>Print</h1>
+          </div>}
+          content={() => this.componentRef3}
+        />
       </div>
           
         )

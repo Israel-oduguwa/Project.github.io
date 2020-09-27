@@ -55,8 +55,8 @@ export class StaticNavbarLinks extends Component {
         return (         
                 <>
                  <div className={classes.navLinks}>
-         <Typography className="navBarLinks" component={Link} to="/resume-templates"  variant="body1" color="inherit" noWrap>
-           Resume Templates
+         <Typography className="navBarLinks" component={Link} to="/resume"  variant="body1" color="inherit" noWrap>
+           Resume Builder
           </Typography>                  
                   <Typography className="navBarLinks" component={Link} to="/coverletter-templates" variant="body1" color="inherit" noWrap>
            CoverLetter
@@ -88,8 +88,8 @@ export class StaticNavbarLinks extends Component {
               className={classes.List}            
             >
                     <List>
-                    <ListItem button component={Link} onClick={this.handleClose} to="/resume-templates">
-                    <ListItemText primary="Resume Templates" />
+                    <ListItem button component={Link} onClick={this.handleClose} to="/resume">
+                    <ListItemText primary="Resume Builder"/>
                     </ListItem>
                     <Divider/>
                     <ListItem button component={Link} onClick={this.handleClose} to="/coverletter-templates">
