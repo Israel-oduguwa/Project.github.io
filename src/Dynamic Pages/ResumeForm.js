@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import BasicDetails from "./FormSteps/BasicDetails";
+import WorkExperienceTips from "./FormSteps/WorkExperienceTips";
 import WorkExperience from "./FormSteps/WorkExperience";
 export class ResumeForm extends Component {
     state={ 
-            step:1,
-                  
+            step:1,                 
             firstName:"",
             lastName:"",
             profession:"",       
@@ -14,18 +14,16 @@ export class ResumeForm extends Component {
             zipCode:"",       
             PhoneNo:"",
             EmailAddress:"",
-            social:[{
-                socialWebsite:"",
-                socialLink:"",
-            }],
-            website:"",
+            social:[],           
+            workExperience:[{
             company:"",
             jobTitle:"",
-            cityies:"",
+            location:"",
             startDate:"",
             endDate:"",
-            highlights:"",
-            summary:""
+            role:"",
+          
+            }]
       
     }
    // The change step metthod
@@ -41,6 +39,12 @@ export class ResumeForm extends Component {
            step: step - 1
        })
    }
+   skipStep = () =>{
+    const { step } = this.state
+    this.setState({
+        step: step + 2
+    })
+   }
    //handle the Input Change
    handleChange = (e) => {
        this.setState({
@@ -49,19 +53,47 @@ export class ResumeForm extends Component {
      
    }
    handleSocialChange = (index, e) =>{
-    const social = [...this.state.social];
+    const social = [...this.state.social]
     social[index][e.target.name] = e.target.value;
     this.setState({
         social
     })
+   }
+   handleWorkExperience = (index , e) =>{
+    const workExperience = [...this.state.workExperience]
+    workExperience[index][e.target.name] = e.target.value;
+    this.setState({
+        workExperience
+    })
+   }
+   addMoreWork = (e) =>{
+       this.setState((prevState) =>({
+           workExperience:[...prevState.workExperience, { company:"",
+           jobTitle:"",
+           location:"",
+           startDate:"",
+           endDate:"",
+           role:"",}]
+       }))
+   }
+   removeMoreWork = (index) =>{
+       const workExperience = [...this.state.workExperience]
+       workExperience.splice(index, 1);
+       this.setState({
+           workExperience
+       })
    }
    addMoreSocial = (e) =>{
        this.setState((prevState) =>({
            social:[...prevState.social, {socialWebsite:"", socialLink:""}]
        }))
    }
-   removeMoreSocial = ( e) =>{
-  
+   removeMoreSocial = (index) =>{
+    const social = [...this.state.social]
+    social.splice(index, 1);
+    this.setState({
+        social
+    })
    }
     render() {
         const { step } = this.state
@@ -73,18 +105,29 @@ export class ResumeForm extends Component {
                    nextStep={this.nextStep}
                    handleChange={this.handleChange}
                    handleSocialChange ={this.handleSocialChange}
+                   removeSocial = {this.removeMoreSocial}
                    states={this.state}
                    addSocial={this.addMoreSocial} 
                    />
                )
-            case 2:
+               case 2:
+               return(
+                   <WorkExperienceTips nextStep={this.nextStep}
+                    skipStep={this.skipStep}
+                   prevStep={this.prevStep}
+                    />
+               )
+            case 3:
                 return(
                     <WorkExperience
                     nextStep={this.nextStep}
+                    remove={this.removeMoreWork}
+                    add={this.addMoreWork}
+                    handleWorkExperience={this.handleWorkExperience}
                     prevStep={this.prevStep}
                     states={this.state}/>
                 )
-            case 3:
+            case 4:
                 return(
                   <h1>Last</h1>
                 )

@@ -8,6 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 // Styles
 const styles = (theme) =>({
     root: {
@@ -32,7 +33,7 @@ export class BasicDetails extends Component {
   }
     
     render() {
-        const { states, handleChange, addSocial, handleSocialChange } = this.props;
+        const { states, nextStep, handleChange, addSocial, handleSocialChange, removeSocial } = this.props;
        
         const { classes } = this.props
         return (
@@ -43,6 +44,7 @@ export class BasicDetails extends Component {
                 <Typography variant="h6" className="form-logo">
                   Israel
                 </Typography>
+                
                 <Typography variant="h6">
                     Basic Details
                 </Typography>
@@ -69,13 +71,14 @@ export class BasicDetails extends Component {
                     <div style={{width:"50%"}} className="col-md-6">
                                   
                     <TextField onChange={handleChange} name="firstName"                 
-                     fullWidth label="First Name" variant="outlined" />
+                     fullWidth label="First Name" defaultValue={states.firstName} variant="outlined" />
                                        
                     </div>
                     <div style={{width:"50%"}} className="col-md-6">
                     <TextField 
                     onChange={handleChange}   
                     label="Last Name" 
+                    defaultValue={states.lastName}
                    name="lastName"
                    fullWidth
                     variant="outlined"  />
@@ -84,7 +87,8 @@ export class BasicDetails extends Component {
                     <div className="col-md-12">
                     <br/>
                     <TextField 
-                    onChange={handleChange}   
+                    onChange={handleChange}  
+                    defaultValue={states.profession} 
                      label="Profession" 
                    name="profession"
                     variant="outlined" fullWidth />
@@ -95,12 +99,14 @@ export class BasicDetails extends Component {
                     onChange={handleChange}   
                      label="City" 
                    name="city"
+                   defaultValue={states.city}
                     variant="outlined" fullWidth />
                     </div>
                     <div style={{width:"50%"}} className="col-md-3">
                     <br/>
                     <TextField 
                     onChange={handleChange}   
+                    defaultValue={states.state}
                      label="State" 
                    name="state" fullWidth
                     variant="outlined"/>                 
@@ -109,26 +115,31 @@ export class BasicDetails extends Component {
                     <br/>
                     <TextField 
                     onChange={handleChange}   
+                    defaultValue={states.zipCode}
                      label="Zip Code" 
                    name="zipCode" fullWidth
                     variant="outlined"/>
                     </div>
                     <div  className="col-md-6">
                                   <br/>
-                                  <TextField onChange={handleChange} name="EmailAddress"                 
+                                  <TextField onChange={handleChange} 
+                                  defaultValue={states.EmailAddress}
+                                  name="EmailAddress"                 
                                     fullWidth label="Email Address" variant="outlined" />
                                                      
                                   </div>
                     <div  className="col-md-6">
                                   <br/>
-                                  <TextField onChange={handleChange} name="phoneNO"                 
+                                  <TextField onChange={handleChange} 
+                                  defaultValue={states.phoneNO}
+                                  name="phoneNO"                 
                                     fullWidth label="Phone Number" variant="outlined" />
                                                      
                                   </div>
                 <div className="col-md-12">
                   <br/>
-                  <Typography variant="h6">
-                    Add social Links
+                  <Typography variant="body1">
+                    Social Links
                   </Typography>
                 </div>
                 {
@@ -138,13 +149,13 @@ export class BasicDetails extends Component {
                     <div style={{width:"50%"}} className="col-md-6">  
                     <br/>         
                                   <TextField onChange={e => handleSocialChange(index, e)} name="socialWebsite"                 
-                                    fullWidth label="Social Platform" value={inputField.socialWebsite} variant="outlined" />
+                                    fullWidth label="Social or website" value={inputField.socialWebsite} variant="outlined" />
                       </div>
                       <div style={{width:"50%"}} className="col-md-6">   
                       <br/>                         
                                   <TextField onChange={e => handleSocialChange(index, e)} name="socialLink"                 
                                     fullWidth label="Social Link" value={inputField.socialLink} variant="outlined" />
-                                   <IconButton>
+                                   <IconButton onClick={() => removeSocial(index)}>
                                      <DeleteIcon/>
                                    </IconButton>
                       </div>
@@ -152,10 +163,18 @@ export class BasicDetails extends Component {
                    </Fragment>
                   ))
                 }
-                </div>
-                <IconButton onClick={addSocial}>
+               <div className="col-md-6">
+               <IconButton onClick={addSocial}>
            <AddIcon/>
         </IconButton>
+               </div>
+               <div className="col-md-6 text-right">
+               <Button onClick={nextStep} variant="contained" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
+          Next
+        </Button> 
+               </div>
+                </div>
+                
             </div>
 
         </Grid>

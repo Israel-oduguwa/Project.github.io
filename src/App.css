@@ -59,12 +59,13 @@ width:50%;
   flex-grow: 1;
 }
 .containers{
-  margin-top: 0vh;
+  margin-top: 2vh;
   width: 100%;
   padding: 0 20px;
 }
-
-
+.Tips{
+padding-top: 60px
+}
 
 
 /* 
