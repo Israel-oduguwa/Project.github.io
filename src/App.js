@@ -53,7 +53,7 @@ class App extends Component {
       <ThemeProvider theme={createMuiTheme(this.state.theme ? dark : light)}>
       <div>
         <div className="App">
-          <button onClick={this.handleTheme}>DarkMode</button>
+          <button onClick={this.handleTheme} style={{display:"none"}}>DarkMode</button>
           <Router>
             <Switch>
               <Route exact path="/" component={LandingPage} />
