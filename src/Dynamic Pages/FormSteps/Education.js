@@ -5,13 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import ReactQuill from 'react-quill'; // ES6
-import 'react-quill/dist/quill.snow.css';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import TextField from '@material-ui/core/TextField';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -21,7 +15,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-// Styles
+
 const styles = (theme) =>({
     root: {
         flexGrow: 1,
@@ -39,10 +33,9 @@ const styles = (theme) =>({
 width:"3px"
       }
 })
-export class WorkExperience extends Component {
+export class Education extends Component {
     state={
-        open:false,
-        theme:"snow"
+        open:false,       
     }
     handleOpen = () =>{
         this.setState({
@@ -59,25 +52,23 @@ export class WorkExperience extends Component {
       this.props.prevStep()
     }
     render() {
-        const { classes} = this.props
-        const { states, handleWorkExperience, 
-          handleRole, add, remove, prevStep, nextStep } = this.props
+        const { classes} = this.props;
+        const { states, addEducation, eduInput,
+            prevStep, nextStep, deleteEdu } = this.props
         return (
-            <>
-<div className="form-Bar">
+           <>
+           <div className="form-Bar">
             <AppBar color="appBar" position="static">
               <Toolbar>              
                 <Typography variant="h6" className="form-logo">
                   Israel
                 </Typography>
                 <Typography variant="h6">
-                    Basic Details
+                   Education
                 </Typography>
               </Toolbar>
             </AppBar>
-           
-          </div>
-          <div className="containers">
+            <div className="containers">
           <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs>
@@ -86,7 +77,7 @@ export class WorkExperience extends Component {
         <Grid item xs={12} sm={10} >
             <div className="Heading">
                 <Typography  gutterBottom  variant="h5">
-                Tell your employee about your most recent job
+                Tell your us About your Education
                 </Typography>
                 <Typography  gutterBottom  variant="body1">
                    
@@ -95,7 +86,7 @@ export class WorkExperience extends Component {
                 <div className="row">
                     <br/>
                {
-                   states.workExperience.map((inputField, index) =>(
+                   states.education.map((edu, index) =>(
                        <Fragment key={index}>
                            <Accordion>
         <AccordionSummary
@@ -104,19 +95,22 @@ export class WorkExperience extends Component {
           id="panel1a-header"
         >
          {
-             inputField.jobTitle !== "" ?
+            edu.schoolName !== "" ?
              <div className={classes.summary} alignItems="center">
                  <Typography variant="body2">
-                     {inputField.jobTitle}, {inputField.company}
+                    {edu.schoolName}
                  </Typography>
                  <Divider className={classes.divide} orientation="vertical" flexItem />
                  <Typography variant="body2">
-                     {inputField.location}
+                     {edu.schoolLocation}
+                 </Typography>
+                 <Typography variant="body1">
+                     {edu.degree}
                  </Typography>
              </div>
               :
               <Typography variant="body2">
-                  Experience {index + 1}
+                  Education {index + 1}
               </Typography>
          }
          
@@ -125,19 +119,19 @@ export class WorkExperience extends Component {
           <div className="row">
               <div style={{margin:"23.7px 0 0 0"}} className="col-md-6">
               <TextField 
-                   onChange={e => handleWorkExperience(index, e)}  
-                    value={inputField.jobTitle}
-                     label="Job title" 
-                   name="jobTitle" fullWidth
+                   onChange={e => eduInput(index, e)}  
+                    value={edu.schoolName}
+                     label="School Name" 
+                   name="schoolName" fullWidth
                     variant="outlined"/> 
               </div>
               <div className="col-md-6">
                   <br/>
               <TextField 
-                   onChange={e => handleWorkExperience(index, e)}  
-                    value={inputField.company}
-                     label="Company" 
-                   name="company" fullWidth
+                   onChange={e => eduInput(index, e)}  
+                    value={edu.schoolLocation}
+                     label="School Location" 
+                   name="schoolLocation" fullWidth
                     variant="outlined"/> 
               </div>
              
@@ -145,10 +139,10 @@ export class WorkExperience extends Component {
              <div className="col-md-6">
                  <br/>
              <TextField 
-                    onChange={e => handleWorkExperience(index, e)}   
-                    value={inputField.location}
-                     label="Location" 
-                   name="location" fullWidth
+                    onChange={e => eduInput(index, e)}   
+                    value={edu.degree}
+                     label="Degree" 
+                   name="degree" fullWidth
                     variant="outlined"/> 
              </div>
              <div style={{width:"50%"}} className="col-md-3">
@@ -158,8 +152,8 @@ export class WorkExperience extends Component {
         label="Start Date"
         type="date"
         name="startDate"
-         defaultValue={inputField.startDate}
-        onChange={e => handleWorkExperience(index, e)}
+         defaultValue={edu.startDate}
+        onChange={e => eduInput(index, e)}
         InputLabelProps={{
           shrink: true,
         }}
@@ -169,72 +163,34 @@ export class WorkExperience extends Component {
                       <br/>
                       <TextField
         id="date2"
-        label="End Date"
+        label="Graduation Date"
         type="date"
-        name="endDate"
-         defaultValue={inputField.endDate}
-        onChange={e => handleWorkExperience(index, e)}
+        name="graduationDate"
+         defaultValue={edu.graduationDate}
+        onChange={e => eduInput(index, e)}
         InputLabelProps={{
           shrink: true,
         }}
       />
                     
                   </div>
-            <div className="col-md-12">
-              <Typography variant="h6">
-                Work Highlights
-              </Typography>
-              </div>    
-            <div className="col-md-12">
-            <ReactQuill 
-          theme={this.state.theme}
-          onChange={handleRole}
-          value={inputField.highlights || ""}
-          modules={WorkExperience.modules}
-          formats={WorkExperience.formats}
-         
-         />
-               
-            </div>
+           
           
-            <IconButton onClick={() => remove(index)}>
+               
+           
+          
+            <IconButton onClick={() => deleteEdu(index)}>
                                      <DeleteIcon/>
                                    </IconButton>
           </div>
           
         </AccordionDetails>
       </Accordion>
-      
-      <Dialog key={index} open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id={index}>What did you do at {
-            inputField.company
-        }</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Add you experience 
-          </DialogContentText>
-          <TextField
-             onChange={e => handleWorkExperience(index, e)}  
-             value={inputField.role}
-              label="Role" 
-            name="role" fullWidth
-             variant="outlined"
-           
-            
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleClose} color="primary">
-           Next
-          </Button>
-          
-        </DialogActions>
-      </Dialog>
                        </Fragment>
                    ))
                }
               <div className="col-md-12">
-              <IconButton onClick={add}>
+              <IconButton onClick={addEducation}>
            <AddIcon/>
         </IconButton>
               </div>
@@ -260,38 +216,11 @@ export class WorkExperience extends Component {
       </Grid>
     </div>
           </div>
-            
-            </>
-            
+           
+          </div>
+           </>
         )
     }
 }
-WorkExperience.modules = {
-  toolbar: [
-    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-    [{size: []}],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, 
-     {'indent': '-1'}, {'indent': '+1'}],
-    ['link', 'image', 'video'],
-    ['clean']
-  ],
-  clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
-    matchVisual: false,
-  }
-}
-/* 
- * Quill WorkExperience formats
- * See https://quilljs.com/docs/formats/
- */
-WorkExperience.formats = [
-  'header', 'font', 'size',
-  'bold', 'italic', 'underline', 'strike', 'blockquote',
-  'list', 'bullet', 'indent',
-  'link', 'image', 'video'
-]
 
-
-
-export default  withStyles(styles)(WorkExperience)
+export default withStyles(styles)(Education)
