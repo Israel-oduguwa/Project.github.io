@@ -11,7 +11,9 @@ import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
 import Slide from '@material-ui/core/Slide';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import ProgressBar from 'react-progressbar-on-scroll';
 import StaticNavbarLinks from "./StaticAppBarComponents/StaticNavbarLinks";
+
 // AppBar components
 import ProductNameLogo from "./StaticAppBarComponents/ProductNameLogo";
 
@@ -28,7 +30,9 @@ const useStyles = makeStyles((theme) => ({
     NavBar:{ 
         //  boxShadow: "none!important",
         //  backgroundColor:"#fafafa"
+        zIndex:"998"
     },
+   
     
   }));
   function ScrollTop(props) {
@@ -85,6 +89,8 @@ export default ({props, children})=> {
     <CssBaseline />
     <HideOnScroll {...props}>
     <div className={classes.grow}>
+   
+               
          <AppBar className={classes.NavBar} color="appBar">
             <Toolbar >
               <ProductNameLogo/>
@@ -95,6 +101,17 @@ export default ({props, children})=> {
          </div>
     </HideOnScroll>
     <Toolbar id="back-to-top-anchor" />
+  
+   <ProgressBar
+   className={classes.progress}
+    
+    color="#6520ec"
+    height={5}
+    direction="right"
+    position="top"
+    gradient={true}
+    gradientColor="#f7588c"/>
+   
     <Container style={{ width: "100%", marginTop:"5vh", overflow: "hidden" }}>
       <Box my={2}>
         {children}

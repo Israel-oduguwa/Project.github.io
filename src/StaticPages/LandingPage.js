@@ -5,6 +5,7 @@ import TopIntro from "../LandingPageComponents/TopIntro";
 import RightIntro from "../LandingPageComponents/RightIntro";
 import LandingPageStep2 from "../LandingPageComponents/LandingPageStep2";
 import LandingPageStep3 from "../LandingPageComponents/LandingPageStep3";
+import ProgressBar from 'react-progressbar-on-scroll'
 import LandingPageStep4 from "../LandingPageComponents/LandingPageStep4";
 
 export class LandingPage extends Component {
@@ -20,6 +21,7 @@ export class LandingPage extends Component {
         const toggle = this.props.darkToggle
         return (
             <div className="LandingPageContainer">
+               
                 <StaticPageNavBar toggleDark={toggle}>
                 <div className="container">
                     <div className="row">

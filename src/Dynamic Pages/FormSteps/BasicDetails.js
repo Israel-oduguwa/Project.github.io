@@ -7,8 +7,14 @@ import TextField from '@material-ui/core/TextField';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
+import Draggable from 'react-draggable'; 
 import Button from '@material-ui/core/Button';
+import Personal from "./personalDetails.svg";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 // Styles
 const styles = (theme) =>({
     root: {
@@ -25,6 +31,9 @@ const styles = (theme) =>({
          
         },
       },
+      formControl:{
+        width:"100%"
+      }
 })
 export class BasicDetails extends Component {
   continue = (e) =>{
@@ -52,14 +61,12 @@ export class BasicDetails extends Component {
             </AppBar>
            
           </div>
-          <div className="containers">
-          <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs>
-          
-        </Grid>
-        <Grid item xs={12} sm={8} >
-            <div className="Heading">
+          <div className="container" style={{marginTop:"20px"}}>
+          <div className="row">
+        
+       <div className="col-md-7">
+         
+       <div className="Heading">
                 <Typography  gutterBottom  variant="h5">
                     Your basic information so that employees can contact you.
                 </Typography>
@@ -130,10 +137,12 @@ export class BasicDetails extends Component {
                                   </div>
                     <div  className="col-md-6">
                                   <br/>
-                                  <TextField onChange={handleChange} 
+                                 
+                                 <TextField onChange={handleChange} 
                                   defaultValue={states.phoneNO}
                                   name="phoneNO"                 
                                     fullWidth label="Phone Number" variant="outlined" />
+                                 
                                                      
                                   </div>
                 <div className="col-md-12">
@@ -148,8 +157,23 @@ export class BasicDetails extends Component {
                    
                     <div style={{width:"50%"}} className="col-md-6">  
                     <br/>         
-                                  <TextField onChange={e => handleSocialChange(index, e)} name="socialWebsite"                 
-                                    fullWidth label="Social or website" value={inputField.socialWebsite} variant="outlined" />
+                    <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="select socisl-label">Social</InputLabel>
+        <Select
+        name="socialWebsite"   
+          labelId="select socisl-label"
+          id="select socisl"
+          value={inputField.socialWebsite}
+          onChange={e => handleSocialChange(index, e)}
+          label="Social"
+        >
+          
+          <MenuItem value="Website">Website</MenuItem>
+          <MenuItem value="Facebook">Facebook</MenuItem>
+          <MenuItem value="Twitter">Twitter</MenuItem>
+          <MenuItem value="Linkden">Linkden</MenuItem>
+        </Select>
+      </FormControl>
                       </div>
                       <div style={{width:"50%"}} className="col-md-6">   
                       <br/>                         
@@ -176,13 +200,16 @@ export class BasicDetails extends Component {
                 </div>
                 
             </div>
+       </div>
 
-        </Grid>
-        <Grid item xs>
-          
-        </Grid>
-      </Grid>
-    </div>
+        
+        
+        <div className="col-md-5">
+        <img src={Personal} alt="personal"style={{height:"100%"}} />
+        </div>
+      
+      
+        </div>
           </div>
            </>
         )
