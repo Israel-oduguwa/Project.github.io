@@ -3,6 +3,19 @@
   margin: 0;
   padding:0,
 }
+/* font color #20123a */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&family=Roboto+Condensed&display=swap");
+
+/* Adding fonts to the  typography */
+h5{
+	font-family: 'Open Sans', sans-serif!important;
+	font-weight: 600!important;
+    color: #20123a!important;
+}
+h6{
+	
+	color: #20123a!important;
+}
 * { -webkit-print-color-adjust: exact !important; }
 body{
 	background: white;
@@ -15,6 +28,9 @@ body{
 button:focus {
   outline:none!important;
   /* outline: 5px auto -webkit-focus-ring-color; */
+}
+.next{
+	margin: 30px 0;
 }
 /* NavLinks design */
 .navBarLinks{
