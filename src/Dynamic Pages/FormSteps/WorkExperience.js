@@ -21,6 +21,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Basic from "./Stepper/Basic";
 // Styles
 const styles = (theme) =>({
     root: {
@@ -70,9 +71,9 @@ export class WorkExperience extends Component {
                 <Typography variant="h6" className="form-logo">
                   Israel
                 </Typography>
-                <Typography variant="h6">
-                    Basic Details
-                </Typography>
+                <div className="stepper">
+<Basic activeSteps={1} />
+                </div>
               </Toolbar>
             </AppBar>
            

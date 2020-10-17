@@ -14,14 +14,27 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import CheckIcon from '@material-ui/icons/Check';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import MobileStepper from '@material-ui/core/MobileStepper'
 import ProgressBar from 'react-progressbar-on-scroll';
-
+import Basic from "./Stepper/Basic";
 import Select from '@material-ui/core/Select';
 // Styles
 const styles = (theme) =>({
     root: {
         flexGrow: 1,
       },
+      completed:{
+        color:"white",
+      background:"#f7588c",
+      borderRadius:"50%",
+      fontSize:"16px",
+      },
+    step:{
+      justifyContent:"center",
+      background:"none", 
+      padding:"20px 0",
+    },
+    
       paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
@@ -46,9 +59,10 @@ export class BasicDetails extends Component {
     render() {
         const { states, nextStep, handleChange, addSocial, handleSocialChange, removeSocial } = this.props;
         const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const { classes } = this.props
+        const { classes } = this.props;
+        
         return (
-           <>
+           <> 
              <div className="form-Bar">
              <ProgressBar
   
@@ -64,24 +78,37 @@ export class BasicDetails extends Component {
                   ATLAS
                 </Typography>
                 
-                <Typography variant="h6">
-                    Basic Details
-                </Typography>
+                <div className="stepper">
+<Basic activeSteps={0} />
+                </div>
+                <div className="phoneStep">
+                 <Typography variant="h5">Personal Details</Typography>
+                </div>
               </Toolbar>
             </AppBar>
            
           </div>
           <div className="container" style={{marginTop:"20px"}}>
           <div className="row">
-        
+        <div className="col-md-12 text-center mobileStepper">
+        <MobileStepper
+      variant="dots"
+      className={classes.step}
+      steps={10}
+      position="static"
+      activeStep={0}
+      
+     
+    />
+        </div>
        <div className="col-md-7">
          
        <div className="Heading">
-                <Typography  gutterBottom  variant="h5">
-                    Your basic information so that employees can contact you.
+                <Typography  gutterBottom className="BasicHeading" variant="h6">
+                Your personal information.
                 </Typography>
-                <Typography  gutterBottom  variant="h6">
-                    Be sure to add your email and phone number.
+                <Typography  gutterBottom className="BasicSub" variant="body1">
+                Your email and phone number is essential as it is the way the employers can contact you.
                 </Typography>
                 <br/>
                 <div className="row">
@@ -90,7 +117,7 @@ export class BasicDetails extends Component {
                     <TextField onChange={handleChange} name="firstName"     
                     InputProps={{
                       endAdornment: <InputAdornment position="end">{
-                        states.firstName.trim() !== "" ? <CheckIcon/> :  <></>
+                        states.firstName.trim() !== "" ? <CheckIcon className={classes.completed} /> :  <></>
                       } </InputAdornment>,
                     }}            
                      fullWidth label="First Name" defaultValue={states.firstName}
@@ -107,7 +134,7 @@ export class BasicDetails extends Component {
                    name="lastName"
                    InputProps={{
                     endAdornment: <InputAdornment position="end">{
-                      states.lastName.trim() !== "" ? <CheckIcon/> :  <></>
+                      states.lastName.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
                     } </InputAdornment>,
                   }}    
                    fullWidth
@@ -122,7 +149,7 @@ export class BasicDetails extends Component {
                      label="Profession" 
                      InputProps={{
                       endAdornment: <InputAdornment position="end">{
-                        states.profession.trim() !== "" ? <CheckIcon/> :  <></>
+                        states.profession.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
                       } </InputAdornment>,
                     }}    
                    name="profession"
@@ -136,13 +163,13 @@ export class BasicDetails extends Component {
                    name="city"
                    InputProps={{
                     endAdornment: <InputAdornment position="end">{
-                      states.city.trim() !== "" ? <CheckIcon/> :  <></>
+                      states.city.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
                     } </InputAdornment>,
                   }}    
                    defaultValue={states.city}
                     variant="outlined" fullWidth />
                     </div>
-                    <div style={{width:"50%", paddingRight:"9px"}} className="col-md-3">
+                    <div style={{width:"50%"}} className="col-md-3 state">
                     <br/>
                     <TextField 
                     onChange={handleChange}   
@@ -150,20 +177,20 @@ export class BasicDetails extends Component {
                      label="State" 
                      InputProps={{
                       endAdornment: <InputAdornment position="end">{
-                        states.state.trim() !== "" ? <CheckIcon/> :  <></>
+                        states.state.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
                       } </InputAdornment>,
                     }}    
                    name="state" fullWidth
                     variant="outlined"/>                 
                     </div>
-                    <div style={{width:"50%", paddingRight:"3px"}} className="col-md-3">
+                    <div style={{width:"50%"}} className="col-md-3 zip">
                     <br/>
                     <TextField 
                     onChange={handleChange}   
                     defaultValue={states.zipCode}
                     InputProps={{
                       endAdornment: <InputAdornment position="end">{
-                        states.zipCode.trim() !== "" ? <CheckIcon/> :  <></>
+                        states.zipCode.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
                       } </InputAdornment>,
                     }}    
                      label="Zip Code" 
@@ -177,7 +204,7 @@ export class BasicDetails extends Component {
                                   name="EmailAddress"                 
                                   InputProps={{
                                     endAdornment: <InputAdornment position="end">{
-                                      states.EmailAddress.match(regEx)  ? <CheckIcon/> :  <></>
+                                      states.EmailAddress.match(regEx)  ? <CheckIcon className={classes.completed}/> :  <></>
                                     } </InputAdornment>,
                                   }}    
                                     fullWidth label="Email Address" variant="outlined" />
@@ -191,7 +218,7 @@ export class BasicDetails extends Component {
                                   name="PhoneNo"  
                                   InputProps={{
                                     endAdornment: <InputAdornment position="end">{
-                                      states.PhoneNo.trim() !== "" ? <CheckIcon/> :  <></>
+                                      states.PhoneNo.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
                                     } </InputAdornment>,
                                   }}                   
                                     fullWidth label="Phone Number" variant="outlined" />
@@ -201,7 +228,7 @@ export class BasicDetails extends Component {
                 <div className="col-md-12">
                   <br/>
                   <Typography variant="body1">
-                    Social
+                    Social links
                   </Typography>
                 </div>
                 {
@@ -234,7 +261,7 @@ export class BasicDetails extends Component {
                                   
                                    InputProps={{
                                     endAdornment: <InputAdornment position="end">{
-                                      states.socialLink !== "" ? <CheckIcon/> :  <></>
+                                      states.socialLink !== "" ? <CheckIcon className={classes.completed}/> :  <></>
                                     } </InputAdornment>,
                                   }}     name="socialLink"                 
                                     fullWidth label="Link" value={inputField.socialLink} variant="outlined" />

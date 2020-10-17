@@ -5,20 +5,45 @@
 }
 /* font color #20123a */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&family=Roboto+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 
 /* Adding fonts to the  typography */
 h5{
-	font-family: 'Open Sans', sans-serif!important;
+	font-family: 'Quicksand', sans-serif!important;
 	font-weight: 600!important;
-    color: #20123a!important;
+    color: rgba(0,0,0,0.8)!important;
+}
+.MuiFormLabel-root {
+    color: rgba(0, 0, 0, 0.54);
+    font-family: 'Quicksand', sans-serif!important;
+    font-weight: 600!important;   
+}
+.MuiOutlinedInput-inputAdornedEnd {
+    font-family: 'Quicksand', sans-serif!important;
+	font-weight: 600!important;
+	
 }
 h6{
-	
+	font-family: 'Quicksand', sans-serif!important;
+	font-weight: 600!important;
+    color: rgba(0,0,0,0.8)!important;
 	color: #20123a!important;
+}
+p{
+	font-family: 'Quicksand', sans-serif!important;
+}
+.BasicHeading{
+	color: #b43072!important;
+}
+.BasicSub{
+	font-family: 'Quicksand', sans-serif!important;
+    font-weight: 600!important;
+    color: rgba(0,0,0,0.7);
 }
 * { -webkit-print-color-adjust: exact !important; }
 body{
-	background: white;
+	/* background: white!important; */
 }
 /* App container styling */
 .App{
@@ -35,6 +60,39 @@ button:focus {
 /* NavLinks design */
 .navBarLinks{
   text-decoration: none!important;
+}
+.stepper{
+	display:none;
+}
+/* mobile for resume Form */
+@media only screen and (min-width: 888px){
+	.mobileStepper{
+		display:none;
+	}
+	.stepper{
+		display:block!important;
+	}
+	.phoneStep{
+		display:none;
+	}
+	.state{
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+	.zip{
+		    /* padding-right: 3px; */
+			padding-left: 2px;
+	}
+}
+@media only screen and (min-width: 680px){
+	.state{
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+	.zip{
+		    /* padding-right: 3px; */
+			padding-left: 2px;
+	}
 }
 .LandingPagecontainer{
   margin-top: 1vh;
