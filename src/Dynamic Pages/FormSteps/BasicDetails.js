@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-import Personal from "./personalDetails.svg";
+import Personal from "./personalDetails (2).svg";
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -104,7 +104,7 @@ export class BasicDetails extends Component {
        <div className="col-md-7">
          
        <div className="Heading">
-                <Typography  gutterBottom className="BasicHeading" variant="h6">
+                <Typography  gutterBottom className="BasicHeading" variant="h5">
                 Your personal information.
                 </Typography>
                 <Typography  gutterBottom className="BasicSub" variant="body1">
@@ -286,8 +286,8 @@ export class BasicDetails extends Component {
 
         
         
-        <div className="col-md-5">
-        <img src={Personal} alt="personal"style={{height:"100%"}} />
+        <div className="col-md-5" style={{marginTop:"8vh"}}>
+        <object type="image/svg+xml" data={Personal}>svg-animation</object>
         </div>
       
         <div className="col-md-12 next text-right">

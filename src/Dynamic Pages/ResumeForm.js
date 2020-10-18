@@ -87,22 +87,23 @@ export class ResumeForm extends Component {
        })
    }
     componentDidMount(){
-      if(this.state.step === 1 ){
-        setTimeout(function() { 
-           
-           this.setState({
-               step: 2
-           })
-        }.bind(this), 4000)
-      }else{
-          console.log("HI")
-      }
+     
       const  auth = localStorage.getItem("auth") === 'true'
       const step = auth ? JSON.parse(localStorage.getItem("steps")) : this.state.step
         this.setState({
             step, auth
         })
-       
+        
+        if(this.state.step === 1 ){
+            setTimeout(function() { 
+               
+               this.setState({
+                   step: 2
+               })
+            }.bind(this), 4000)
+          }else{
+              console.log("HI")
+          }
     }
     handleAccomp = (value) =>{
         this.setState({
