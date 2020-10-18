@@ -88,7 +88,8 @@ export class BasicDetails extends Component {
             </AppBar>
            
           </div>
-          <div className="container" style={{marginTop:"20px"}}>
+         <div className="form">
+         <div className="container" style={{marginTop:"8px"}}>
           <div className="row">
         <div className="col-md-12 text-center mobileStepper">
         <MobileStepper
@@ -297,6 +298,7 @@ export class BasicDetails extends Component {
                </div>
         </div>
           </div>
+         </div>
            </>
         )
     }
