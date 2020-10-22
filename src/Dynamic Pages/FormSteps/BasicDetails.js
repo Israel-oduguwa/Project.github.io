@@ -13,6 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import CheckIcon from '@material-ui/icons/Check';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MobileStepper from '@material-ui/core/MobileStepper'
 import ProgressBar from 'react-progressbar-on-scroll';
@@ -25,14 +26,14 @@ const styles = (theme) =>({
       },
       completed:{
         color:"white",
-      background:"#f7588c",
+      background:"#450477",
       borderRadius:"50%",
       fontSize:"16px",
       },
     step:{
       justifyContent:"center",
       background:"none", 
-      padding:"20px 0",
+      
     },
     
       paper: {
@@ -82,7 +83,7 @@ export class BasicDetails extends Component {
 <Basic activeSteps={0} />
                 </div>
                 <div className="phoneStep">
-                 <Typography variant="h5">Personal Details</Typography>
+                 <Typography className="phoneStepText" variant="h5">Personal Details</Typography>
                 </div>
               </Toolbar>
             </AppBar>
@@ -98,11 +99,15 @@ export class BasicDetails extends Component {
       steps={10}
       position="static"
       activeStep={0}
-      
+       nextButton={
+       <IconButton onClick={nextStep}>
+         <KeyboardArrowRight />
+       </IconButton>
+      }
      
     />
         </div>
-       <div className="col-md-7">
+       <div className="col-md-7 form-right">
          
        <div className="Heading">
                 <Typography  gutterBottom className="BasicHeading" variant="h5">
@@ -112,7 +117,7 @@ export class BasicDetails extends Component {
                 Your email and phone number is essential as it is the way the employers can contact you.
                 </Typography>
                 <br/>
-                <div className="row">
+                <div className="row form-row">
                     <div style={{width:"50%"}} className="col-md-6">
                                   
                     <TextField onChange={handleChange} name="firstName"     
@@ -201,6 +206,7 @@ export class BasicDetails extends Component {
                     <div  className="col-md-6">
                                   <br/>
                                   <TextField onChange={handleChange} 
+                                  type="email"
                                   defaultValue={states.EmailAddress}
                                   name="EmailAddress"                 
                                   InputProps={{
@@ -292,8 +298,8 @@ export class BasicDetails extends Component {
         </div>
       
         <div className="col-md-12 next text-right">
-               <Button onClick={nextStep} variant="contained" disableElevation  disabled={states.firstName.trim() === "" || states.PhoneNo.trim() === ""  || states.EmailAddress.trim() === ""  || states.lastName.trim() === "" } color="secondary">
-          Next Section
+               <Button onClick={nextStep} variant="contained" disableElevation  disabled={states.firstName.trim() === "" || states.PhoneNo.trim() === ""  || states.EmailAddress.match(regEx)  || states.lastName.trim() === "" } color="secondary">
+          Next Section Experience
         </Button> 
                </div>
         </div>

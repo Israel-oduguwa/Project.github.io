@@ -12,7 +12,8 @@ import Extra from "./FormSteps/Extra";
 import StartLoad from "./FormSteps/StartLoad";
 export class ResumeForm extends Component {
     state={ 
-            step: 1,                 
+            step: 1,  
+            Loading:true,               
             firstName:"",
             auth:false,
             lastName:"",
@@ -24,15 +25,7 @@ export class ResumeForm extends Component {
             PhoneNo:"",
             EmailAddress:"",
             social:[],           
-            workExperience:[{
-            company:"",
-            jobTitle:"",
-            location:"",
-            startDate:"",
-            endDate:"",
-            highlights:""
-
-            }],
+            workExperience:[],
             education:[{
                 schoolName:"",
                 schoolLocation:"",
@@ -86,23 +79,23 @@ export class ResumeForm extends Component {
            custom:value
        })
    }
-    componentDidMount(){
-     
+    componentDidMount(){ 
       const  auth = localStorage.getItem("auth") === 'true'
       const step = auth ? JSON.parse(localStorage.getItem("steps")) : this.state.step
         this.setState({
             step, auth
         })
-        
-        if(this.state.step === 1 ){
-            setTimeout(function() { 
-               
+        if(!this.state.auth){
+            setTimeout(
+                function() {              
                this.setState({
-                   step: 2
+                   Loading:false
                })
-            }.bind(this), 4000)
-          }else{
-              console.log("HI")
+            }.bind(this), 3000)
+          } else{
+             this.setState({
+                 step
+             })
           }
     }
     handleAccomp = (value) =>{
@@ -273,31 +266,34 @@ export class ResumeForm extends Component {
     render() {
         const { step } = this.state
         
-       switch(step){
+       switch(step){           
            case 1:
-               return(
-                   <StartLoad />
+               return( 
+                   <>
+                   {
+                       this.state.Loading ?
+                       <StartLoad />:
+                       <BasicDetails
+                       nextStep={this.nextStep}
+                       handleChange={this.handleChange}
+                       handleSocialChange ={this.handleSocialChange}
+                       removeSocial = {this.removeMoreSocial}
+                       states={this.state}
+                       save
+                       addSocial={this.addMoreSocial} 
+                       />
+                  
+                   }
+                   </>
                )
-           case 2:
-               return(
-                   <BasicDetails
-                   nextStep={this.nextStep}
-                   handleChange={this.handleChange}
-                   handleSocialChange ={this.handleSocialChange}
-                   removeSocial = {this.removeMoreSocial}
-                   states={this.state}
-                   save
-                   addSocial={this.addMoreSocial} 
-                   />
-               )
-               case 3:
+               case 2:
                return(
                    <WorkExperienceTips nextStep={this.nextStep}
                     skipStep={this.skipStep}
                    prevStep={this.prevStep}
                     />
                )
-            case 4:
+            case 3:
                 return(
                     <WorkExperience
                     handleRole={this.handleRole}
@@ -308,14 +304,14 @@ export class ResumeForm extends Component {
                     prevStep={this.prevStep}
                     states={this.state}/>
                 )
-            case 5:
+            case 4:
                 return(
                     <EducationTips nextStep={this.nextStep}
                     skipStep={this.skipStep}
                    prevStep={this.prevStep}
                     />
                 )
-            case 6:
+            case 5:
                 return(
                     <Education
                     nextStep={this.nextStep}
@@ -325,7 +321,7 @@ export class ResumeForm extends Component {
                     deleteEdu={this.deleteEducation}
                     states={this.state}/>
                 )  
-            case 7:
+            case 6:
             return(
                 <Skills
                 nextStep={this.nextStep}
@@ -336,7 +332,7 @@ export class ResumeForm extends Component {
                 states={this.state}/>
 
             )     
-            case 8:
+            case 7:
             return(
                 <ProfileTips
                 nextStep={this.nextStep}
@@ -344,7 +340,7 @@ export class ResumeForm extends Component {
                    prevStep={this.prevStep}/>
 
             )     
-            case 9:
+            case 8:
             return(
                 <Profile
                 nextStep={this.nextStep}
@@ -354,7 +350,7 @@ export class ResumeForm extends Component {
                    prevStep={this.prevStep}/>
               
             )   
-            case 10:
+            case 9:
                 return(
                    <Extra
                    nextStep={this.nextStep}
@@ -370,7 +366,7 @@ export class ResumeForm extends Component {
                     handleCustom={this.handleCustom}
                     prevStep={this.prevStep}/>
                 )  
-            case 11:
+            case 10:
                 return(
                     <ChooseTemplates  nextStep={this.nextStep}
                     skipStep={this.skipStep}
