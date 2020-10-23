@@ -90,7 +90,7 @@ export class BasicDetails extends Component {
            
           </div>
          <div className="form">
-         <div className="container" style={{marginTop:"8px"}}>
+         <div className="container Tips">
           <div className="row">
         <div className="col-md-12 text-center mobileStepper">
         <MobileStepper
@@ -298,7 +298,7 @@ export class BasicDetails extends Component {
         </div>
       
         <div className="col-md-12 next text-right">
-               <Button onClick={nextStep} variant="contained" disableElevation  disabled={states.firstName.trim() === "" || states.PhoneNo.trim() === ""  || states.EmailAddress.match(regEx)  || states.lastName.trim() === "" } color="secondary">
+               <Button onClick={nextStep} variant="contained" disableElevation  disabled={states.firstName.trim() === "" || states.PhoneNo.trim() === ""  || !states.EmailAddress.match(regEx)  || states.lastName.trim() === "" } color="secondary">
           Next Section Experience
         </Button> 
                </div>

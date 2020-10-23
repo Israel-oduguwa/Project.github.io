@@ -5,25 +5,21 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
 import ReactQuill from 'react-quill'; // ES6
 import 'react-quill/dist/quill.snow.css';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import ProgressBar from 'react-progressbar-on-scroll';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Personal from "./work.svg";
 import TextField from '@material-ui/core/TextField';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import AddIcon from '@material-ui/icons/Add';
-import Divider from '@material-ui/core/Divider';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
 import CheckIcon from '@material-ui/icons/Check';
 import Button from '@material-ui/core/Button';
 import Basic from "./Stepper/Basic";
@@ -83,6 +79,14 @@ export class WorkExperience extends Component {
         return (
             <>
 <div className="form-Bar">
+<ProgressBar
+  
+  color="#6520ec"
+  height={5}
+  direction="right"
+  position="top"
+  gradient={true}
+  gradientColor="#f7588c"/>
             <AppBar color="appBar" position="static">
               <Toolbar>              
                 <Typography variant="h6" className="form-logo">
@@ -95,16 +99,16 @@ export class WorkExperience extends Component {
             </AppBar>
            
           </div>
-          <div className="container">
+          <div className="container-fluid workContainer">
+
         <div className="row">
-          <div className="col-md-8">
-          <div className="col-md-12 text-center mobileStepper">
+        <div className="col-md-12 text-center mobileStepper">
         <MobileStepper
       variant="dots"
       className={classes.step}
       steps={10}
       position="static"
-      activeStep={1}
+      activeStep={2}
       nextButton={
        <IconButton onClick={nextStep}>
          <KeyboardArrowRight />
@@ -119,6 +123,8 @@ export class WorkExperience extends Component {
      
     />
         </div>
+          <div className="col-md-7 Tips">
+          
             <div className="Heading">
                 <Typography  gutterBottom  variant="h5">
                 Tell your employer about your experience
@@ -126,11 +132,12 @@ export class WorkExperience extends Component {
                 <Typography  gutterBottom className="BasicSub" variant="body1">
                 Start with your recent job
                 </Typography>
-                <div className="row experienceInput">                    
+              <div className="input">
+              <div className="row experienceInput">                    
                {
                    states.workExperience.map((inputField, index) =>(
                        <Fragment key={index}>
-                           <Accordion>
+                           <Accordion className="Accordion">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           
@@ -141,23 +148,26 @@ export class WorkExperience extends Component {
         {
              inputField.jobTitle !== "" ?
              <div className={classes.summary} alignItems="center">
-                 <Typography variant="body1">
-                     {inputField.jobTitle}, {inputField.company}
+                 <Typography className="summerywork" variant="body1">
+                     {inputField.jobTitle} from {inputField.company}
                  </Typography>
-                 <Divider className={classes.divide} orientation="vertical" flexItem />
-                 <Typography variant="body1">
-                     {inputField.location}
-                 </Typography>
+                
+                {
+                  inputField.endDate !== "" ?
+                  <Typography className="summerywork" variant="body1">
+                  , {inputField.startDate} - {inputField.endDate}
+              </Typography>:
+              <Typography className="summerywork" variant="body1">
+                , Unknown - Unknown
+              </Typography>
+                }
              </div>
               :
-              <div className={classes.summary} alignItems="center">
-                 <Typography variant="body1">
-                    Not Specified, Unknown
+              <div  alignItems="center">
+                 <Typography className="summerywork" variant="body1">
+                    (Not Specified), Unknown
                  </Typography>
-                 <Divider className={classes.divide} orientation="vertical" flexItem />
-                 <Typography variant="body1">
-                     Unknown
-                 </Typography>
+                
              </div>
          }
          <IconButton onClick={() => remove(index)}>
@@ -167,16 +177,21 @@ export class WorkExperience extends Component {
         </AccordionSummary>
         <AccordionDetails>
           <div className="row">
-              <div style={{margin:"23.7px 0 0 0"}} className="col-md-6">
+              <div className="col-md-6">
               <TextField 
                    onChange={e => handleWorkExperience(index, e)}  
                     value={inputField.jobTitle}
                      label="Job title" 
+                     InputProps={{
+                      endAdornment: <InputAdornment position="end">{
+                       inputField.jobTitle.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
+                      } </InputAdornment>,
+                    }}  
                    name="jobTitle" fullWidth
                     variant="outlined"/> 
               </div>
-              <div className="col-md-6">
-                  <br/>
+              <div className="col-md-6 lapExp">
+                 
               <TextField 
                    onChange={e => handleWorkExperience(index, e)}  
                     value={inputField.company}
@@ -191,8 +206,8 @@ export class WorkExperience extends Component {
               </div>
              
                   
-             <div className="col-md-6">
-                 <br/>
+             <div className="col-md-12 col-sm-6 col-lg-6 phoneExp">
+                
              <TextField 
                     onChange={e => handleWorkExperience(index, e)}   
                     value={inputField.location}
@@ -205,8 +220,8 @@ export class WorkExperience extends Component {
                   }}  
                     variant="outlined"/> 
              </div>
-             <div style={{width:"50%"}} className="col-md-3">
-              <br/>
+             <div style={{width:"50%"}} className="col-md-6 col-sm-3 col-lg-3 phoneExp">
+             
                       <TextField
         id="date1"
         label="Start Date"
@@ -219,8 +234,8 @@ export class WorkExperience extends Component {
         }}
       />
                       </div>
-                      <div style={{width:"50%"}} className="col-md-3">
-                      <br/>
+                      <div style={{width:"50%"}} className="col-md-3 phoneExp">
+                     
                       <TextField
         id="date2"
         label="End Date"
@@ -257,10 +272,15 @@ export class WorkExperience extends Component {
                        </Fragment>
                    ))
                }
-              <div className="col-md-12 addExperience">
+             
+               </div>
+              </div>
+               <div className="row">
+               <div className="col-md-12 addExperience">
               <Button
               className="AddExperienceButton"
               startIcon={ <AddIcon/>}
+              variant="outlined"
                onClick={add}>
            Add Experience
         </Button>
@@ -269,22 +289,26 @@ export class WorkExperience extends Component {
         In this section, list related employment experience in your last 10 years along with the dates. Mention the most recent employment first.
         </Typography>
               </div>
-       <div className="row experienceEnd">
-           
-       <div className="col-md-6 Previous">
-        <Button onClick={prevStep} variant="text" disableElevation color="secondary">
-        <KeyboardArrowLeft /> Previous  
-        </Button> 
-        </div>
-        <div className="col-md-6 text-right next">
-        <Button onClick={nextStep} variant="contained" disableElevation  color="secondary">
-          Next Section Education
-        </Button> 
-        </div>
-       </div>
+      
                </div>
                 </div>
           </div>
+          <div style={{marginTop:"8vh"}} className="col-md-5">
+               <img src={Personal} alt="work"/>
+          </div>
+          <div className="row experienceEnd">
+           
+           <div className="col-md-6 Previous">
+            <Button onClick={prevStep} variant="text" disableElevation color="secondary">
+            <KeyboardArrowLeft /> Previous  
+            </Button> 
+            </div>
+            <div className="col-md-6 text-right next">
+            <Button onClick={nextStep} variant="contained" disableElevation  color="secondary">
+              Next Section Education
+            </Button> 
+            </div>
+           </div>
         </div>
           </div>
             

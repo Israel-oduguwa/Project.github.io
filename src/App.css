@@ -3,6 +3,7 @@
   margin: 0;
   padding:0,
 }
+
 /* font color #20123a */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&family=Roboto+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
@@ -19,6 +20,25 @@ h5{
 	font-weight: 600!important;
     color: rgba(0,0,0,0.8)!important;
 }
+.Accordion{
+	/* box-shadow:none!important; */
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.MuiPaper-elevation1 {
+    /* box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12); */
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px!important;
+}
+.MuiInput-root {
+    /* position: relative; */
+    width: 86%!important;
+}
+.WorkExperience-summary-4 hr {
+
+    height: 3vh!important;
+}
+.divider{
+	height: 3vh!important;
+}
 .MuiFormLabel-root {
     color: rgba(0, 0, 0, 0.54);
     font-family: 'Quicksand', sans-serif!important;
@@ -28,6 +48,10 @@ h5{
     font-family: 'Quicksand', sans-serif!important;
 	font-weight: 600!important;
 	
+}
+.MuiAccordionDetails-root {
+    
+    padding: 0px 16px 16px!important;
 }
 h6{
 	font-family: 'Quicksand', sans-serif!important;
@@ -112,6 +136,9 @@ button:focus {
 .form-row{
 	margin-top:2vh;
 }
+.summerywork{
+	font-weight:600!important;
+}
 .form-right{
 	margin-top:2vh;
 }
@@ -121,12 +148,22 @@ button:focus {
 .Previous{
 	display:none;
 }
+.phoneExp{
+	margin-top:20px;
+}
+.lapExp{
+	margin-top:20px
+}
 /* mobile for resume Form */
 @media only screen and (min-width: 888px){
 	.Previous{
 		display:block;
 		margin: 30px 0;
 	}
+	.lapExp{
+		margin-top:0px!important;
+	}
+	
 	.MuiStepLabel-label.MuiStepLabel-active {
 		color: rgba(0, 0, 0, 0.87);
 		font-weight: 500;
@@ -164,6 +201,31 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 5
 			padding-left: 2px;
 	}
 }
+@media only screen and (min-width: 1000px){
+	.experienceInput{
+		overflow-y: auto;
+	max-height: 70vh;
+	overflow-x: hidden;
+	padding:2px;
+}
+.workContainer{
+	padding:0 70px
+}
+.experienceInput::-webkit-scrollbar {
+    width: 0.1em!important;
+}
+  
+.experienceInput::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)!important;
+}
+ 
+.experienceInput::-webkit-scrollbar-thumb {
+  background-color:#e2e2e2;
+ 
+}
+
+}
+
 @media only screen and (min-width: 680px){
 	.state{
 		padding-right: 0px;
