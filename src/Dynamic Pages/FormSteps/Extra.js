@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import Card from "@material-ui/core/Card";
 import AppBar from '@material-ui/core/AppBar';
 import { withStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
-import AddIcon from '@material-ui/icons/Add';
-import Divider from '@material-ui/core/Divider';
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // ES6
-import TextField from '@material-ui/core/TextField';
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
+import Basic from "./Stepper/Basic";
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import Personal from "./Professor.svg";
+import MobileStepper from '@material-ui/core/MobileStepper';
+import CheckIcon from '@material-ui/icons/Check';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
+import ProgressBar from 'react-progressbar-on-scroll';
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = (theme) =>({
     root: {
@@ -29,6 +29,11 @@ const styles = (theme) =>({
         '& hr': {
           margin: theme.spacing(0, 0.5),
         },
+      },
+      step:{
+        justifyContent:"center",
+        background:"none", 
+        padding:"20px 0",
       },
       divider:{
 width:"3px"
@@ -45,32 +50,57 @@ export class Extra extends Component {
             prevStep, nextStep, handleToggle } = this.props;
         return (
             <>
+             <ProgressBar
+  
+  color="#6520ec"
+  height={5}
+  direction="right"
+  position="top"
+  gradient={true}
+  gradientColor="#f7588c"/>
              <AppBar color="appBar" position="static">
               <Toolbar>              
                 <Typography variant="h6" className="form-logo">
                   Israel
                 </Typography>
-                <Typography variant="h6">
-                  Extra Information
-                </Typography>
+                <div className="stepper">
+<Basic activeSteps={5} />
+                </div>
+                
               </Toolbar>
             </AppBar>
-            <div className="containers">
-          <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs>
-          
-        </Grid>
-        <Grid item xs={12} sm={9} >
-            <div className="Heading">
+            <div className="container">
+              <div className="row">
+              <div className="col-md-12 text-center mobileStepper">
+        <MobileStepper
+      variant="dots"
+      className={classes.step}
+      steps={10}
+      position="static"
+      activeStep={8}
+      nextButton={
+       <IconButton onClick={nextStep}>
+         <KeyboardArrowRight />
+       </IconButton>
+      }
+      backButton={
+      <IconButton onClick={prevStep}>
+         <KeyboardArrowLeft />
+         
+      </IconButton>
+      }
+     
+    />
+        </div>
+              <div className="Heading">
                 <Typography  gutterBottom  variant="h5">
                 Do you have anything else to add?
                 </Typography>
-                <Typography  gutterBottom  variant="body1">
-                These sections are optional.
+                <Typography  gutterBottom className="BasicSub" variant="body1">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. At, cumque!
                 </Typography>
                 <br/>
-                <div className="row">
+                <div className="row Tips">
 
               <div className="col-md-6">
             <Typography variant="h6"> Accomplishment </Typography> 
@@ -89,7 +119,7 @@ export class Extra extends Component {
              modules={Extra.modules}
              formats={Extra.formats}
              bounds={'.app'}
-             placeholder="Enter your Profile"
+             placeholder="accomplishments"
             /> : 
             <> </>}
               </div>
@@ -192,35 +222,21 @@ export class Extra extends Component {
               </div>
      
           
-       {/* <div className="col-md-6">
-        <Button onClick={prevStep} variant="contained" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
-         Back
-        </Button> 
-        </div>
-        <div className="col-md-6 text-right">
-        <Button onClick={nextStep} variant="contained" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
-          Next
-        </Button> 
-        </div> */}
-         <div className="col-md-6">
-        <Button onClick={prevStep} variant="contained" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
-         Back
-        </Button> 
-        </div>
-        <div className="col-md-6 text-right">
-        <Button onClick={nextStep} variant="contained" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
-          Next
-        </Button> 
-        </div>
+       
        </div>
+      
                </div>
-               
-        </Grid>
-        <Grid item xs>
-          
-        </Grid>
-      </Grid>
-    </div>
+               <div className="col-md-6 Previous">
+        <Button onClick={prevStep} variant="text" color="secondary">
+        <KeyboardArrowLeft /> Previous  
+        </Button> 
+        </div>
+        <div className="col-md-6 text-right next">
+        <Button onClick={nextStep} variant="contained" disableElevation color="secondary">
+         Finalize
+        </Button> 
+        </div>
+              </div>
           </div>
             </>
         )

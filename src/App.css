@@ -75,6 +75,10 @@ p{
     font-weight: 600!important;
    
 }
+.skillsCard{
+	padding:20px 0;
+	padding-left: 20px;
+}
 .AddExperienceButton{
 	font-family: 'Quicksand', sans-serif!important;
 	font-weight: 600!important;
@@ -105,6 +109,9 @@ p{
 	flex-grow: 1;
     display: flex;
     justify-content: space-between;
+}
+.Quill{
+	margin-top: 2vh;
 }
 
 * { -webkit-print-color-adjust: exact !important; }
@@ -353,6 +360,9 @@ img{width:100%!important}
 .languages{
   list-style: none;
 }
+ul{
+	padding: "0 15px"
+}
 .personal-info{
   background: rgb(248, 248, 248);
   padding: 24px;
@@ -361,6 +371,7 @@ img{width:100%!important}
   padding: 24px
 }
 /* 
+ul
 
 .container1 {
   

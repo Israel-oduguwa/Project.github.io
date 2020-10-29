@@ -11,9 +11,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import ReactToPrint from "react-to-print";
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import Typography from '@material-ui/core/Typography';
 import Interweave from "interweave";
 
-import Typography from '@material-ui/core/Typography';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -33,6 +34,30 @@ export class Example extends Component {
     }
     render() {
         const { profile,
+          lastName,
+            profession,       
+            address,
+            city,
+            state,
+            zipCode,       
+            PhoneNo,
+            skills,
+            accomplishments,
+            accomplished,
+            certifications,
+            certified,
+            projects,
+            projectToggle,
+            interest,
+            interestToggle,
+            languages,
+            languagesToggle,            
+            activities,
+            activitiesToggle,
+            addRating,
+            education,
+            workExperience,
+            EmailAddress,
             firstName} =this.props.state
         return (
            <>
@@ -54,133 +79,209 @@ export class Example extends Component {
                 </CardActionArea>
             </Card>
             <Dialog fullScreen open={this.state.open} TransitionComponent={Transition} onClose={this.handleClose}>
-            <div ref={el => (this.componentRef = el)} className="container1">
-            <div className="header">
-      <div className="full-name">
-        <h2 className="Name">Frank Shelby</h2> 
-        <div className="profession">
-        <h5 >Master Electrician</h5>
-        </div>
-      </div>
+        
+            <div  className="containersh" style={{background: "#fff",
+    margin: "0px auto 0px", 
+    boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+    borderRadius: "3px",  
+    width: "621px",
+    padding:"0px 0px",
+    lineHeight: "28px",
+    }}>
+        
+    <div ref={el => (this.componentRef = el)} style={{display: "flex", justifyContent:"space-between", width: "100%"}} className="document">
+        <div style={{width: "30%",  color:"#fff", backgroundColor: "rgb(3, 79, 144)"}} className="left-box">
+            <div style={{padding: "15px 15px"}} className="nameProfession ">
+                <div style={{fontSize: "26px"}} class="nameSpan">
+               {
+                 firstName ?
+                 <h2>{firstName} {lastName} </h2>:
+                 <h2>John Doe</h2>
+               }
+                </div>
+                <div  className="profession">
+                  {
+                    profession ?
+                    <Typography variant="subtitle"> {profession} </Typography>:
+                    <Typography variant="subtitle">Profession</Typography>
+                  }
+                </div>
+            </div>
+            <div style={{padding:"0px 0px"}} className="contact">
+                    <div class="heading" style={{background: "#003D73"}}>
+                       <h5 style={{padding:"0 15px", color:"#fff!important"}}>
+                          Contacts
+                       </h5>
+                      <div/>
+                      </div>
+                <div className="contactParams" style={{padding: "15px 15px", fontSize: "14px"}}>
+               <div className="address">
+                  <Typography style={{fontWeight:600}} variant="body1">
+                    Address
+                  </Typography>
+               </div>
+                
+              {
+                address ?
+                <Typography variant="subtitle"> {city}, {state}</Typography>:
+                <Typography variant="subtitle">Abeokuta , OG</Typography>
+              }
+               <div className="address">
+               <Typography style={{fontWeight:600}} variant="body1">
+                   Phone
+                  </Typography>
+               </div>
+                
+               {
+                 PhoneNo ?  <Typography variant="subtitle">{PhoneNo}</Typography>:
+                 <Typography variant="subtitle">phone no</Typography>
+               } 
+               <div className="address">
+               <Typography style={{fontWeight:600}} variant="body1">
+                    Email
+                  </Typography>
+               </div>
+                
+               {
+                 EmailAddress ?  <Typography variant="subtitle">{EmailAddress}</Typography>:
+                 <Typography variant="subtitle">YourName@email.com</Typography>
+               }
+                </div>
+                </div>
+            {
+              skills ?
+              <div style={{padding:"0px 0px"}} className="skill">
+                    <div class="skills" style={{background: "#003D73"}}>
+                        <span style={{fontSize:"18px", padding: "15px"}}>
+                           Skills
+                        </span>
+                    </div>
+                <div className="skillsParams" style={{fontSize:"14px", padding: "15px"}}>
+                <ul style={{lineHeight:"28px"}}>
+                {
+                  skills.map((skill, index) =>(
+                    <li key={index}>
+                    {skill.body}
+                     </li>
+                  ))
+                }
+                </ul>
+                </div>
+                </div>:
+                <> </>
+            }
+            {
+              interestToggle ?
+              <div style={{padding:"0px 0px"}} className="skill">
+                    <div class="skills" style={{background: "#003D73"}}>
+                        <span style={{fontSize:"18px", padding: "15px"}}>
+                           Skills
+                        </span>
+                    </div>
+                <div className="skillsParams" style={{fontSize:"14px", padding: "15px"}}>
+                <Interweave content={interest}/>
+                </div>
+                </div>:
+                <> </>
 
-      
-      
-   
-    </div>  
-    <div className="body">
-    <div className="row">
-      <div className="col-md-8">
-      <div className="left-hand">
-          <div className="profile">
-              <p style={{fontWeight:"500"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptas, sunt ipsa expedita repudiandae recusandae in aspernatur eveniet incidunt dignissimos.</p>
-            </div>
-            <div className="experience">
-              <h5>Experience</h5>
-              <hr/>
-              <div className="row">
-                <div className="col-md-2">
-                  2012-03 - present
+            }
+            {
+              certified ?
+              <div style={{padding:"0px 0px"}} className="skill">
+                    <div class="skills" style={{background: "#003D73"}}>
+                        <span style={{fontSize:"18px", padding: "15px"}}>
+                           Certifications
+                        </span>
+                    </div>
+                <div className="skillsParams" style={{fontSize:"14px", padding: "15px"}}>
+               <Interweave content={certifications}/>
                 </div>
-                <div className="col-md-9">
-                  <div className="experience-title">
-                    <h6>Master electrician</h6>
-                  </div>
-                  <div className="company">
-                    <p>ABC company and CO</p>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab iure, commodi cum magni nulla, fugit numquam iusto, tempora repellat cumque non repellendus deleniti pariatur? Inventore quas obcaecati consequatur sequi possimus!
-                  </p>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-2">
-                  2012-03 - present
-                </div>
-                <div className="col-md-9">
-                  <div className="experience-title">
-                    <h6>Master electrician</h6>
-                  </div>
-                  <div className="company">
-                    <p>ABC company and CO</p>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab iure, commodi cum magni nulla, fugit numquam iusto, tempora repellat cumque non repellendus deleniti pariatur? Inventore quas obcaecati consequatur sequi possimus!
-                  </p>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-2">
-                  2012-03 - present
-                </div>
-                <div className="col-md-9">
-                  <div className="experience-title">
-                    <h6>Master electrician</h6>
-                  </div>
-                  <div className="company">
-                    <p>ABC company and CO</p>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab iure, commodi cum magni nulla, fugit numquam iusto, tempora repellat cumque non repellendus deleniti pariatur? Inventore quas obcaecati consequatur sequi possimus!
-                  </p>
-                </div>
-              </div>
-            </div>
-      </div>
-      </div>
-      <div className="col-md-4">
-        <div className="right-side">
-          <div className="personal-info">
-            <h5>Personal Info</h5>
-            <hr/>
-            <div className="Details">
-             <h6>Address</h6>
-             <p>1 Amos be balogun street euwoliwo sagamu, ogunstate Nigeria.</p>
-            </div>
-            <h6>Phone</h6>
-            <p>08084868224</p>
-            <h6>E-mail</h6>
-            <p>oduguwa.israel22@gmail.com</p>
-            <h6>Website</h6>
-            <p>israel.com</p>
-           
-            <h5>Skills</h5>
-            <hr/>
-            <div className="skills">
-              <li>
-                <span>html</span> <span>
-                  <span className="progress" style={{height:'7px'}} >
-                    <div className="progress-bar" role="progressbar" style={{width:"25%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span>css</span> <span>
-                  <span className="progress" style={{height:'7px'}} >
-                    <div className="progress-bar" role="progressbar" style={{width:"25%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </span>
-                </span>
-              </li>
-            </div>
-            <h5>Languages</h5>
-            <div className="languages">
-                <hr/>
-              <li>English</li>
-              <li>French</li>
-            </div>
-            
-            <h5>Interests</h5>
-            <hr/>
-            <div className="interests">
-              <Interweave content={profile} />
-            </div>
-          </div>
+                </div>:
+                <> </>
+            }
         </div>
-      </div>
+        
+        <div className="right-box" style={{width: "70%"}}>
+           <div className="casing" style={{lineHeight:"25px", padding: "0 15px"}}>
+               {
+                 profile ?
+                 <div class="summary" style={{color: "rgb(116, 116, 116)", fontSize: "14px"}}>
+                   <Interweave content={profile} />
+               </div>:
+               <> </>
+               }
+              {
+                education ?
+                <div className="educationSection">
+                    <div className="education">
+                            <hr/>
+                            <div className="educationTitle" style={{padding: "0 2px"}}>
+                                <span style={{color: "#003D73", fontWeight: 600, fontSize: "18px"}}>Education</span>
+                            </div>
+                            <hr/>
+                            {
+                              education.map((edu, index) =>(
+                                <div className="educationDetails" style={{display: "flex", justifyContent:"space-between", width: "100%", height: "100%"}}>
+                               <div className="timeDate" >
+                                 <span>{edu.startDate} - {edu.graduationDate}</span>
+                               </div>
+                                <div class="degreeAndName" style={{width:"70%"}}>
+                                   <span>{edu.Degree}</span>
+                                    <div className="location">
+                                      <span>{edu.schoolName} - {edu.schoolLocation}</span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                              ))
+                            }
+                    </div>
+
+              </div>:
+              <> </>
+              }
+              
+              {
+                workExperience ?
+                <div className="workSection">
+                    <div className="job">
+                            <hr/>
+                            <div className="workExperiencTitle" style={{padding: "0 2px"}}>
+                                <span style={{color: "#003D73", fontWeight: 600, fontSize: "18px"}}>WorkHistory</span>
+                            </div>
+                            <hr/>
+
+                           {
+                             workExperience.map((job,index)=>(
+                                <div className="jobDetails" style={{display: "flex", justifyContent:"space-between", width: "100%", height: "100%"}}>
+                               <div className="timeDate">
+                                 <span>{job.startDate} - {job.endDate}</span>
+                               </div>
+                                <div class="degreeAndName" style={{width:"70%"}}>
+                                    <span>{job.jobTitle}</span>
+                                    <div className="location">
+                                      <span>{job.company} - {job.location}</span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                             ))
+                           }
+                    </div>
+
+              </div>:
+              <></>
+              }
+              
+              
+
+           </div>
+          
+        </div>
     </div>
+
     </div>
-         </div>
-    <div className="container">
+              <div className="container">
         <div className="row">
             <div className="col-md-12">
             <ReactToPrint

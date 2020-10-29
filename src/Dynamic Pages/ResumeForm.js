@@ -37,6 +37,8 @@ export class ResumeForm extends Component {
                 body:"",
                 rating:""
             }],
+            addRating:false,
+            skillsExperience:false,
             profile:"",
             accomplishments:"",
             accomplished:false,
@@ -59,6 +61,7 @@ export class ResumeForm extends Component {
            projects:value
        })
    }
+   
    handleInterest = (value) =>{
        this.setState({
         interest:value
@@ -226,7 +229,15 @@ export class ResumeForm extends Component {
            highlights:""}]
        }))
    }
-   
+   handleSkillsRating = (value) =>{
+       const skills = [...this.state.skills]
+       const index = skills.findIndex(el => el.rating === "rating");
+      skills[index] = {...skills[index], rating: value}
+      this.setState({
+          skills
+      })
+      console.log(value)
+   }
    handleRole = (value) =>{
     const workExperience = [...this.state.workExperience]
        const index = workExperience.findIndex(el => el.highlights === "highlights");
@@ -326,6 +337,8 @@ export class ResumeForm extends Component {
                 <Skills
                 nextStep={this.nextStep}
                     prevStep={this.prevStep}
+                    valuetext={this.handleSkillsRating}
+                    handleToggle={this.handleToggleChange}
                 skillInput={this.handleSkillInput}
                 addSkills={this.addSkills}
                 delSkills={this.delSkill}

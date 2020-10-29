@@ -10,7 +10,6 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import TextField from '@material-ui/core/TextField';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
-import Divider from '@material-ui/core/Divider';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
@@ -82,7 +81,7 @@ export class Education extends Component {
                   Atlas
                 </Typography>
                 <div className="stepper">
-<Basic activeSteps={1} />
+<Basic activeSteps={2} />
                 </div>
                 
               </Toolbar>

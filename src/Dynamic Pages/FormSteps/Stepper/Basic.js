@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Heading', 'Work Experience', 'Education', 'Profile', ' skills'];
+  return ['Heading', 'Work Experience', 'Education', 'Skills', ' Summary'];
 }
 
 function getStepContent(step) {
@@ -127,9 +127,9 @@ function getStepContent(step) {
     case 2:
       return 'Education';
     case 3:
-      return 'Profile';
-    case 4:
       return 'Skills';
+    case 4:
+      return 'Summary';
     default:
       return 'Unknown step';
   }
