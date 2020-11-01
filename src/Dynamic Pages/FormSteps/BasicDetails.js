@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import { withStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
+import {Helmet} from "react-helmet";
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import AddIcon from '@material-ui/icons/Add';
@@ -64,6 +65,11 @@ export class BasicDetails extends Component {
         
         return (
            <> 
+           <Helmet>
+                <meta charSet="utf-8" />
+                <title>Contact Info - React app</title>
+                
+            </Helmet>
              <div className="form-Bar">
              <ProgressBar
   

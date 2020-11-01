@@ -9,6 +9,7 @@ import ProfileTips from "./FormSteps/ProfileTips";
 import Profile from "./FormSteps/Profile";
 import ChooseTemplates from "./FormSteps/ChooseTemplates";
 import Extra from "./FormSteps/Extra";
+import { EditorState } from 'draft-js';
 import StartLoad from "./FormSteps/StartLoad";
 export class ResumeForm extends Component {
     state={ 
@@ -25,7 +26,12 @@ export class ResumeForm extends Component {
             PhoneNo:"",
             EmailAddress:"",
             social:[],           
-            workExperience:[],
+            workExperience:[ { company:"",
+            jobTitle:"",
+            location:"",
+            startDate:"",
+            endDate:"",
+            highlights:""}],
             education:[{
                 schoolName:"",
                 schoolLocation:"",
@@ -37,6 +43,7 @@ export class ResumeForm extends Component {
                 body:"",
                 rating:""
             }],
+            
             addRating:false,
             skillsExperience:false,
             profile:"",
@@ -56,35 +63,32 @@ export class ResumeForm extends Component {
             customToggle:false,
             custom:"",
     }
-   handleProjects = (value) =>{
-       this.setState({
-           projects:value
-       })
-   }
-   
-   handleInterest = (value) =>{
-       this.setState({
-        interest:value
-       })
-   }
-   handleLanguages = (value) =>{
-       this.setState({
-           languages:value
-       })
-   }
-   handleActivities = (value) =>{
-       this.setState({
-           activities:value
-       })
-   }
-   handleCustom = (value) =>{
-       this.setState({
-           custom:value
-       })
-   }
+
     componentDidMount(){ 
       const  auth = localStorage.getItem("auth") === 'true'
-      const step = auth ? JSON.parse(localStorage.getItem("steps")) : this.state.step
+      const step = auth ? JSON.parse(localStorage.getItem("steps")) : this.state.step;
+      const firstName = auth ? localStorage.getItem("firstName") : this.state.firstName;
+   const lastName = auth ? localStorage.getItem("lastName") : this.state.lastName
+   const profession  = auth ?    localStorage.getItem("profession") : this.state.profession
+   const address  = auth ?    localStorage.getItem("address") : this.state.address
+   const city  = auth ?   localStorage.getItem("city") : this.state.city
+   const state  = auth ?   localStorage.getItem("state") : this.state.state
+   const zipCode  = auth ?   localStorage.getItem("zipCode") : this.state.zipCode
+   const phoneNO  = auth ?  localStorage.getItem("phoneNo") : this.state.PhoneNo
+   const EmailAddress = auth ?   localStorage.getItem("EmailAddress") : this.state.EmailAddress
+   const social  = auth ?  JSON.parse(localStorage.getItem("social")) : this.state.social
+   const workExperience  = auth ?   JSON.parse(localStorage.getItem("workExperience")) : this.state.workExperience
+   const education  = auth ?   JSON.parse(localStorage.getItem("education")) : this.state.education
+   const skills  = auth ?   JSON.parse(localStorage.getItem("skills")) : this.state.skills
+   const addRating  = auth ?  localStorage.getItem("addRating") : this.state.addRating
+   const profile = auth ?  localStorage.getItem("profile") : this.state.profile
+   const accomplishments  = auth ?  localStorage.getItem("accomplishments") : this.state.accomplishments
+   const accomplished  = auth ?  localStorage.getItem("accomplished") : this.state.accomplished
+   const certifications  = auth ?  localStorage.getItem("certifications") : this.state.certifications
+   const certified  = auth ?  localStorage.getItem("certified") : this.state.certified
+   const projects  = auth ?  localStorage.getItem("projects") : this.state.projects
+   const projectToggle  = auth ?   localStorage.getItem("projectToggle") : this.state.projectToggle
+      
         this.setState({
             step, auth
         })
@@ -95,11 +99,55 @@ export class ResumeForm extends Component {
                    Loading:false
                })
             }.bind(this), 3000)
+            console.log(workExperience)
+            this.setState({
+                firstName:firstName,
+                lastName:lastName,
+                profession:profession,
+                address:address,
+                city:city,
+                state:state,
+                zipCode:zipCode,
+                PhoneNo:phoneNO,
+                EmailAddress:EmailAddress,
+                social:social,
+                workExperience:workExperience,
+                education:education,
+                skills:skills,
+                profile:profile
+            })
           } else{
              this.setState({
                  step
              })
+            
           }
+    }
+    handleProjects = (value) =>{
+        this.setState({
+            projects:value
+        })
+    }
+   
+    handleInterest = (value) =>{
+        this.setState({
+         interest:value
+        })
+    }
+    handleLanguages = (value) =>{
+        this.setState({
+            languages:value
+        })
+    }
+    handleActivities = (value) =>{
+        this.setState({
+            activities:value
+        })
+    }
+    handleCustom = (value) =>{
+        this.setState({
+            custom:value
+        })
     }
     handleAccomp = (value) =>{
         this.setState({
@@ -132,13 +180,36 @@ export class ResumeForm extends Component {
        console.log(JSON.parse(localStorage.getItem("resumeData")))
        localStorage.setItem("steps", this.state.step + 1)
        localStorage.setItem("auth", this.state.auth)
+       localStorage.setItem("firstName", this.state.firstName);
+       localStorage.setItem("lastName", this.state.lastName);
+       localStorage.setItem("profession", this.state.profession);
+       localStorage.setItem("address", this.state.address);
+       localStorage.setItem("city", this.state.city);
+       localStorage.setItem("state", this.state.lastName);
+       localStorage.setItem("zipCode", this.state.zipCode);
+       localStorage.setItem("phoneNo", this.state.phoneNo);
+       localStorage.setItem("EmailAddress", this.state.EmailAddress);
+       localStorage.setItem("social", JSON.stringify(this.state.social));
+       localStorage.setItem("workExperience", JSON.stringify(this.state.workExperience));
+       localStorage.setItem("education", JSON.stringify(this.state.education));
+       localStorage.setItem("skills", JSON.stringify(this.state.skills))
+       localStorage.setItem("addRating", this.state.addRating);
+       localStorage.setItem("profile", this.state.profile);
+       localStorage.setItem("accomplishments", this.state.accomplishments);
+       localStorage.setItem("accomplished", this.state.accomplished);
+       localStorage.setItem("certifications", this.state.certifications);
+       localStorage.setItem("certified", this.state.certified);
+       localStorage.setItem("projects", this.state.projects);
+       localStorage.setItem("ProjectsToggle", this.state.ProjectsToggle);
    }
    prevStep = () =>{
        const { step } = this.state
        this.setState({
            step: step - 1
        })
+       localStorage.setItem("resumeData", JSON.stringify(this.state))
        localStorage.setItem("steps", this.state.step - 1 )
+       
        localStorage.setItem("condition", this.state.auth)
    }
    skipStep = () =>{
@@ -180,6 +251,14 @@ export class ResumeForm extends Component {
           skill
        })
    }
+   handleWorkExperienceSummary = (value, index) =>{
+    let work = [...this.state.workExperience];
+    work[index] =  {...work[index], highlights: value}
+    this.setState({
+        workExperience: work
+    })
+    console.log(value)
+   }
    addSkills = () =>{
        this.setState((prevState) => ({
            skills:[...prevState.skills, {
@@ -200,6 +279,7 @@ export class ResumeForm extends Component {
     this.setState({
         workExperience
     })
+
    }
    addEducation = () =>{
        this.setState((prevState) => ({
@@ -311,6 +391,7 @@ export class ResumeForm extends Component {
                     nextStep={this.nextStep}
                     remove={this.removeMoreWork}
                     add={this.addMoreWork}
+                    summary={this.handleWorkExperienceSummary}
                     handleWorkExperience={this.handleWorkExperience}
                     prevStep={this.prevStep}
                     states={this.state}/>

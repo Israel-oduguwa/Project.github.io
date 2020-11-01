@@ -5,8 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
-import ReactQuill from 'react-quill'; // ES6
-import 'react-quill/dist/quill.snow.css';
 import ProgressBar from 'react-progressbar-on-scroll';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -17,6 +15,8 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import AddIcon from '@material-ui/icons/Add';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // ES6
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
@@ -75,7 +75,7 @@ export class WorkExperience extends Component {
     render() {
         const { classes} = this.props
         const { states, handleWorkExperience, 
-          handleRole, add, remove, prevStep, nextStep } = this.props
+          handleRole, add, remove, prevStep, nextStep, summary } = this.props
         return (
             <>
 <div className="form-Bar">
@@ -252,14 +252,15 @@ export class WorkExperience extends Component {
              
             <div className="col-md-12 experienceEditor">
             <ReactQuill 
-          theme={this.state.theme}
-          onChange={handleRole}
-          value={inputField.highlights || ""}
-          modules={WorkExperience.modules}
-          formats={WorkExperience.formats}
-         
-         />
-               
+             theme="snow"
+             onChange={summary}
+             value={inputField.highlights|| ''}
+             modules={WorkExperience.modules}
+             formats={WorkExperience.formats}
+             bounds={'.app'}
+             placeholder="Languages"
+            />
+             
             </div>
           
             
@@ -275,7 +276,7 @@ export class WorkExperience extends Component {
              
                </div>
               </div>
-               <div className="row">
+               <div className="row" contentEditable="true" >
                <div className="col-md-12 addExperience">
               <Button
               className="AddExperienceButton"
@@ -317,33 +318,35 @@ export class WorkExperience extends Component {
         )
     }
 }
+
 WorkExperience.modules = {
   toolbar: [
-    // [{ 'font': [] }],
+    [{ 'header': '1'}, { 'header': '2'}, { 'font': [] }],
     [{size: []}],
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, 
-     {'indent': '-1'}, {'indent': '+1'}],
-    // ['link', 'image', 'video'],
-    // ['clean']
+    [{'list': 'ordered'}, {'list': 'bullet'},
+    //  {'indent': '-1'}, {'indent': '+1'}, 
+     { 'color': ['#000000', '#e60000', '#ff9900',
+     '#ffff00', '#008a00', '#0066cc', '#9933ff', '#ffffff', '#facccc', '#ffebcc', '#ffffcc', '#cce8cc', '#cce0f5',
+      '#ebd6ff', '#bbbbbb', '#f06666', '#ffc266', '#ffff66', '#66b966', '#66a3e0', '#c285ff', '#888888', '#a10000',
+       '#b26b00', '#b2b200', '#006100', '#0047b2', '#6b24b2', '#444444',
+     '#5c0000', '#663d00', '#666600', '#003700', '#002966', '#3d1466', 'custom-color'] },
+   ],
+    
+    ['clean']
   ],
   clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
+    // toggle to add WorkExperience line breaks when pasting HTML:
     matchVisual: false,
   }
 }
-/* 
- * Quill WorkExperience formats
- * See https://quilljs.com/docs/formats/
- */
+
 WorkExperience.formats = [
-  // 'font',
-   'size',
+  'header', 'font', 'size',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
-  'list', 'bullet', 'indent',
-  // 'link', 'image', 'video'
+  'list', 'bullet',  
+  // 'indent',
+  'link',  'color', 
 ]
-
-
 
 export default  withStyles(styles)(WorkExperience)
