@@ -7,18 +7,25 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ProgressBar from 'react-progressbar-on-scroll';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+import {Helmet} from "react-helmet";
 import TextField from '@material-ui/core/TextField';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Basic from "./Stepper/Basic";
+import Select from '@material-ui/core/Select';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Personal from "./Professor.svg";
 import MobileStepper from '@material-ui/core/MobileStepper';
 import CheckIcon from '@material-ui/icons/Check';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 const styles = (theme) =>({
     root: {
@@ -41,6 +48,9 @@ width:"3px"
         background:"none", 
         padding:"20px 0",
       },
+      formControl:{
+        width:"100%"
+      }
 })
 export class Education extends Component {
     state={
@@ -63,9 +73,15 @@ export class Education extends Component {
     render() {
         const { classes} = this.props;
         const { states, addEducation, eduInput,
+          current,
             prevStep, nextStep, deleteEdu } = this.props
         return (
            <>
+            <Helmet>
+               
+                <title>Education - React app</title>
+                
+            </Helmet>
            <div className="form-Bar">
            <ProgressBar
   
@@ -181,9 +197,56 @@ export class Education extends Component {
               </div>
              
                   
-             <div className="col-md-12 col-sm-6 col-lg-6 phoneExp">
-                 
-             <TextField 
+             <div className="col-md-6 col-sm-6 col-lg-6 phoneExp">
+             <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="selectDegree">Degree</InputLabel>
+        <Select
+        name="Degree"   
+          labelId="selectDegree"
+          id="select-Degree"         
+          onChange={e => eduInput(index, e)}
+          value={edu.Degree}
+          label="Degree"
+        >
+          
+          <MenuItem value="High School Diploma">High School Diploma</MenuItem>
+          <MenuItem value="GED">GED</MenuItem>
+          <MenuItem value="Associate of Arts">Associate of Arts</MenuItem>
+          <MenuItem value="Associate of Applied Science">Associate of Applied Science</MenuItem>
+          <MenuItem value="Associate of Science">Associate of Science</MenuItem>
+          <MenuItem value="Bachelor of Science">Bachelor of Science</MenuItem>
+          <MenuItem value="Bachelor of Art">Bachelor of Art</MenuItem>
+          <MenuItem value="Bachelor of Fine Arts">Bachelor of Fine Arts</MenuItem>
+          <MenuItem value="BBA">BBA</MenuItem>
+          <MenuItem value="Master of Science">Master of Science</MenuItem>
+          <MenuItem value="Master of Arts">Master of Arts</MenuItem>
+          <MenuItem value="MBA">MBA</MenuItem>
+          <MenuItem value="Ph.D">Ph.D</MenuItem>
+          <MenuItem value="J.D">J.D</MenuItem>
+          <MenuItem value="M.D">M.D</MenuItem>
+          <MenuItem value="DDS">DDS</MenuItem>
+          <MenuItem value="Enter a different degree">Enter a different degree</MenuItem>
+          <MenuItem value="No Degree">No Degree</MenuItem>
+        </Select>
+        </FormControl>
+            
+             </div>
+             <div className="col-md-6 col-sm-6 col-lg-6 phoneExp">
+                { 
+                  edu.Degree === "Enter a different degree" ?
+                  <TextField 
+                    onChange={e => eduInput(index, e)}   
+                    value={edu.customDegree}
+                     label="Enter a degree" 
+                   name="customDegree" fullWidth
+                   InputProps={{
+                    endAdornment: <InputAdornment position="end">{
+                     edu.customDegree.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
+                    } </InputAdornment>,
+                  }}  
+                    variant="outlined"/>:
+                    <TextField 
+                     style={{visibility:"hidden"}}
                     onChange={e => eduInput(index, e)}   
                     value={edu.Degree}
                      label="Degree" 
@@ -193,7 +256,38 @@ export class Education extends Component {
                      edu.Degree.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
                     } </InputAdornment>,
                   }}  
-                    variant="outlined"/> 
+                    variant="outlined"/>
+                  }
+             </div>
+             <div className="col-md-6 phoneExp">
+               {
+                  edu.Degree !== "High School Diploma" && edu.Degree !== "GED"?
+                  <TextField 
+                  onChange={e => eduInput(index, e)}   
+                  value={edu.field}
+                   label="Field of Study" 
+                 name="field" fullWidth
+                 InputProps={{
+                  endAdornment: <InputAdornment position="end">{
+                   edu.field.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
+                  } </InputAdornment>,
+                }}  
+                  variant="outlined"/>:
+                  <TextField 
+                  disabled
+                  onChange={e => eduInput(index, e)}   
+                  value={edu.field}
+                   label="Field of Study" 
+                 name="field" fullWidth
+                 InputProps={{
+                  endAdornment: <InputAdornment position="end">{
+                   edu.field.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
+                  } </InputAdornment>,
+                }}  
+                  variant="outlined"/>
+
+               }
+             
              </div>
              <div style={{width:"50%"}} className="col-md-6 col-sm-3 col-lg-3 phoneExp">
               
@@ -211,18 +305,46 @@ export class Education extends Component {
                       </div>
                       <div style={{width:"50%"}} className="col-md-3 phoneExp">
                       
-                      <TextField
-        id="date2"
-        label="Graduation Date"
-        type="date"
-        name="graduationDate"
-         defaultValue={edu.graduationDate}
-        onChange={e => eduInput(index, e)}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
+                     {
+                       !edu.currents ?
+                       <TextField
+                       id="date2"
+                       label="Graduation Date"
+                       type="date"
+                       name="graduationDate"
+                        defaultValue={edu.graduationDate}
+                       onChange={e => eduInput(index, e)}
+                       InputLabelProps={{
+                         shrink: true,
+                       }}
+                     />:
+                     <TextField
+                     id="date2"
+                    //  visibility={{visibility:"hidden"}}
+                    disabled
+                     label="Graduation Date"
+                     type="date"
+                     name="graduationDate"
+                      defaultValue={edu.graduationDate}
+                     onChange={e => eduInput(index, e)}
+                     InputLabelProps={{
+                       shrink: true,
+                     }}
+                   />
+                     }
                     
+                  </div>
+                  <div className="col-md-12 text-right">
+                  <FormControlLabel
+         
+         control={ <Checkbox
+           name="currents" 
+         inputProps={{ 'aria-label': 'primary checkbox' }} 
+         checked={edu.currents}         
+         onChange={e => current(index, e)} />}
+         labelPlacement="end"
+         label="I currently Attend here"
+       />
                   </div>
           </div>
           

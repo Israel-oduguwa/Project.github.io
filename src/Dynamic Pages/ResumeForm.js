@@ -31,13 +31,18 @@ export class ResumeForm extends Component {
             location:"",
             startDate:"",
             endDate:"",
+            current:false,
             highlights:""}],
             education:[{
                 schoolName:"",
                 schoolLocation:"",
                 Degree:"",
                 startDate:"",
-                graduationDate:""
+                graduationDate:"",
+                currents:false,
+                customDegree:"",
+                field:"",
+                
             }],
             skills:[{
                 body:"",
@@ -218,6 +223,20 @@ export class ResumeForm extends Component {
         step: step + 2
     })
    }
+   handleToggleChange = (index, event) => {  
+       const workExperience = [...this.state.workExperience]
+       workExperience[index][event.target.name] = event.target.checked
+    this.setState({
+        workExperience
+    })    
+   }
+   handleToggleChanges = (index, event) => {  
+       const education = [...this.state.education]
+       education[index][event.target.name] = event.target.checked
+    this.setState({
+        education
+    })    
+   }
    handleProfile = (value) =>{
        this.setState({
            profile:value
@@ -284,11 +303,14 @@ export class ResumeForm extends Component {
    addEducation = () =>{
        this.setState((prevState) => ({
            education:[...prevState.education, {
-            schoolName:"",
-            schoolLocation:"",
-            Degree:"",
-            startDate:"",
-            graduationDate:""
+                schoolName:"",
+                schoolLocation:"",
+                Degree:"",
+                startDate:"",
+                graduationDate:"",
+                currents:false,
+                customDegree:"",
+                field:""
         } ]
        }))
    }
@@ -306,6 +328,7 @@ export class ResumeForm extends Component {
            location:"",
            startDate:"",
            endDate:"",
+           current:false,
            highlights:""}]
        }))
    }
@@ -393,6 +416,7 @@ export class ResumeForm extends Component {
                     add={this.addMoreWork}
                     summary={this.handleWorkExperienceSummary}
                     handleWorkExperience={this.handleWorkExperience}
+                    current={this.handleToggleChange}
                     prevStep={this.prevStep}
                     states={this.state}/>
                 )
@@ -408,6 +432,7 @@ export class ResumeForm extends Component {
                     <Education
                     nextStep={this.nextStep}
                     prevStep={this.prevStep}
+                    current={this.handleToggleChanges}
                     addEducation={this.addEducation}
                     eduInput={this.handleEduInput}
                     deleteEdu={this.deleteEducation}

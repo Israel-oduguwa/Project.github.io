@@ -10,14 +10,16 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Personal from "./work.svg";
 import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import Checkbox from '@material-ui/core/Checkbox';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import AddIcon from '@material-ui/icons/Add';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // ES6
-
+import {Helmet} from "react-helmet";
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import CheckIcon from '@material-ui/icons/Check';
@@ -56,13 +58,15 @@ height:"3.2vh"
 export class WorkExperience extends Component {
     state={
         open:false,
-        theme:"snow"
+        theme:"snow",
+        
     }
     handleOpen = () =>{
         this.setState({
             open:true
         })
     }
+   
     handleClose = () =>{
         this.setState({
             open:false
@@ -73,11 +77,17 @@ export class WorkExperience extends Component {
       this.props.prevStep()
     }
     render() {
+
         const { classes} = this.props
         const { states, handleWorkExperience, 
-          handleRole, add, remove, prevStep, nextStep, summary } = this.props
+          handleRole, add, remove, prevStep, nextStep, summary, current } = this.props
         return (
             <>
+             <Helmet>
+                <meta charSet="utf-8" />
+                <title>Work Experience - React app</title>
+                
+            </Helmet>
 <div className="form-Bar">
 <ProgressBar
   
@@ -153,9 +163,9 @@ export class WorkExperience extends Component {
                  </Typography>
                 
                 {
-                  inputField.endDate !== "" ?
+                  inputField.startDate !== "" ?
                   <Typography className="summerywork" variant="body1">
-                  , {inputField.startDate} - {inputField.endDate}
+                  , {inputField.startDate} - {!inputField.current ? <>{inputField.endDate}</> : <> current </>}
               </Typography>:
               <Typography className="summerywork" variant="body1">
                 , Unknown - Unknown
@@ -236,7 +246,10 @@ export class WorkExperience extends Component {
                       </div>
                       <div style={{width:"50%"}} className="col-md-3 phoneExp">
                      
-                      <TextField
+                      {
+                        !inputField.current ?
+                        <TextField
+                      
         id="date2"
         label="End Date"
         type="date"
@@ -246,10 +259,34 @@ export class WorkExperience extends Component {
         InputLabelProps={{
           shrink: true,
         }}
+      />:
+      <TextField
+                style={{visibility:"hidden"}}      
+        id="date2"
+        label={ !inputField.current ? "End Date" : "Disabled" }
+        type="date"
+        name="endDate"
+         defaultValue={inputField.endDate}
+        onChange={e => handleWorkExperience(index, e)}
+        InputLabelProps={{
+          shrink: true,
+        }}
       />
-                    
+                      }
+               
                   </div>
-             
+                  <div className="col-md-12 text-right">
+                  <FormControlLabel
+         
+         control={ <Checkbox
+           name="current" 
+         inputProps={{ 'aria-label': 'primary checkbox' }} 
+         checked={inputField.current}         
+         onChange={e => current(index, e)} />}
+         labelPlacement="end"
+         label="I currently work here"
+       />
+                  </div>
             <div className="col-md-12 experienceEditor">
             <ReactQuill 
              theme="snow"
@@ -276,7 +313,7 @@ export class WorkExperience extends Component {
              
                </div>
               </div>
-               <div className="row" contentEditable="true" >
+               <div className="row"  >
                <div className="col-md-12 addExperience">
               <Button
               className="AddExperienceButton"
