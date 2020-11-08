@@ -9,11 +9,12 @@ export class ChooseTemplates extends Component {
         return (
            <div className="container">
                <div className="row">
-                   <div className="col-md-3">
+                   <div className="col-md-5">
                        <Example state={states}/>
                    </div>
 
-                   <div className="col-md-6">
+                  <div className="row">
+                  <div className="col-md-6">
         <Button onClick={prevStep} variant="contained" style={{boxShadow: "0 3px 5px 2px rgb(195 14 81 / 30%)"}} color="secondary">
          Back
         </Button> 
@@ -23,6 +24,7 @@ export class ChooseTemplates extends Component {
           Next
         </Button> 
         </div>
+                  </div>
                </div>
                
            </div>

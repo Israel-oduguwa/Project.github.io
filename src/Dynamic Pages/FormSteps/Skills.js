@@ -8,12 +8,9 @@ import AddIcon from '@material-ui/icons/Add';
 import ProgressBar from 'react-progressbar-on-scroll';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import Slider from '@material-ui/core/Slider';
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
 import Button from '@material-ui/core/Button';
+import {Helmet} from "react-helmet";
 import MobileStepper from '@material-ui/core/MobileStepper';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Personal from "./skills.svg";
@@ -23,7 +20,6 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-
 import CheckIcon from '@material-ui/icons/Check';
 
 const styles = (theme) =>({
@@ -56,6 +52,11 @@ export class Skills extends Component {
             prevStep, nextStep, delSkills, valuetext } = this.props
         return (
            <>
+            <Helmet>
+               
+               <title>Skills - React app</title>
+               
+           </Helmet>
            <div className="form-Bar">
            <ProgressBar  
   color="#6520ec"
@@ -119,6 +120,11 @@ export class Skills extends Component {
                     onChange={e => skillInput(index, e)}   
                     value={skills.body}
                      label="skill" 
+                     InputProps={{
+                      endAdornment: <InputAdornment position="end">{
+                       skills.body.trim() !== "" ? <CheckIcon className={classes.completed}/> :  <></>
+                      } </InputAdornment>,
+                    }}  
                    name="body" fullWidth
                     variant="outlined"/> 
                    </div>
@@ -130,7 +136,13 @@ export class Skills extends Component {
                     label="%" 
                   name="rating" fullWidth 
                    variant="outlined"/> :
-                   <></>}
+                   <TextField 
+                   disabled
+                   onChange={e => skillInput(index, e)}   
+                   value={skills.rating}
+                    label="%" 
+                  name="rating" fullWidth 
+                   variant="outlined"/> }
                    </div>
                    <div className="col-md-2 col-sm-2 col-sm-2 col-2">
                    <IconButton onClick={() => delSkills(index)} >
@@ -185,7 +197,7 @@ export class Skills extends Component {
         </div>
         <div className="col-md-6 text-right next">
         <Button onClick={nextStep} variant="contained" disableElevation color="secondary">
-        Next Section Profile
+        Next Professional summary
         </Button> 
         </div>
               

@@ -97,7 +97,7 @@ export class Education extends Component {
                   Atlas
                 </Typography>
                 <div className="stepper">
-<Basic activeSteps={3} />
+<Basic activeSteps={2} />
                 </div>
                 
               </Toolbar>

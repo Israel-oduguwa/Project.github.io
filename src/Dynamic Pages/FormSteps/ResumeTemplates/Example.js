@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
+
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import ReactToPrint from "react-to-print";
-import CloseIcon from '@material-ui/icons/Close';
+
 import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import Interweave from "interweave";
+import { saveAs } from 'file-saver';
+import axios from "axios"
 
 
 
@@ -22,11 +21,21 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   
 export class Example extends Component {
     state={open:false}
+   
     open = () =>{
         this.setState({
-            open:true
+            open:true,
+           
         })
     }
+    createAndDownloadPdf = () => {
+      axios.post('https://us-central1-resume-builder-startup.cloudfunctions.net/api/create-pdf', this.props.state)
+      .then(() => axios.get('https://us-central1-resume-builder-startup.cloudfunctions.net/api/fetch-pdf', { responseType: 'blob' }))
+      .then((res) => { 
+        const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+        saveAs(pdfBlob, `${this.props.state.firstName} Resume.pdf`)
+      })
+   }
     handleClose = () =>{
         this.setState({
             open:false
@@ -61,11 +70,12 @@ export class Example extends Component {
             firstName} =this.props.state
         return (
            <>
-            <Card>
+           <div className="container">
+           <Card>
                 <CardActionArea onClick={this.open}>
                 <CardMedia
-         
-          image="https://cdn-images.zety.com/images/zety/landings/examples/teacher-resume-example@3x.png"
+         style={{height:"280px"}}
+          image="https://i.picsum.photos/id/1015/6000/4000.jpg?hmac=aHjb0fRa1t14DTIEBcoC12c5rAXOSwnVlaA5ujxPQ0I"
           title="Contemplative Reptile"
         />
         <CardContent>
@@ -73,36 +83,41 @@ export class Example extends Component {
             Simple Resume
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Simple but proffesional resume catvheds the Hr
+           This Resume is Simple and elegant for HighSchool and college students
           </Typography>
         </CardContent>
                 </CardActionArea>
             </Card>
             <Dialog fullScreen open={this.state.open} TransitionComponent={Transition} onClose={this.handleClose}>
-        
-            <div  className="containersh" style={{background: "#fff",
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-md-7">
+                  <div  className="containersh" style={{background: "#fff",
     margin: "0px auto 0px", 
     boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
     borderRadius: "3px",  
-    width: "621px",
+    // width: "700px",
     padding:"0px 0px",
-    lineHeight: "28px",
+    // lineHeight: "28px",
     }}>
         
     <div ref={el => (this.componentRef = el)} style={{display: "flex", justifyContent:"space-between", width: "100%"}} className="document">
         <div style={{width: "30%",  color:"#fff", backgroundColor: "rgb(3, 79, 144)"}} className="left-box">
             <div style={{padding: "15px 15px"}} className="nameProfession ">
-                <div style={{fontSize: "26px"}} class="nameSpan">
+                <div 
+                // style={{fontSize: "26px"}}
+                 class="nameSpan">
                {
                  firstName ?
-                 <h2>{firstName} {lastName} </h2>:
+                 <h2>{firstName} {lastName}</h2>:
                  <h2>John Doe</h2>
                }
                 </div>
                 <div  className="profession">
                   {
                     profession ?
-                    <Typography variant="subtitle"> {profession} </Typography>:
+                    <p>{profession}</p>
+                   :
                     <Typography variant="subtitle">Profession</Typography>
                   }
                 </div>
@@ -281,21 +296,22 @@ export class Example extends Component {
     </div>
 
     </div>
-              <div className="container">
-        <div className="row">
-            <div className="col-md-12">
-            <ReactToPrint
+                  </div>
+                  <div className="col-md-5">
+                  {/* <ReactToPrint
           trigger={() =><button>Print propto</button>}
           copyStyles={true}
 
-          pageStyle='@page { size: auto; margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; padding: 40px !important; } }'
+          pageStyle='@page { size: auto; margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; height:100%; } }'
           content={() => this.componentRef}
-        />
-        <button onClick={this.handleClose}>Close</button>
-            </div>
-        </div>
-    </div>
+        /> */}
+        <Button variant="contained" onClick={this.createAndDownloadPdf}>Download Resume</Button>
+                  </div>
+                </div>
+              </div>
+         
             </Dialog>
+           </div>
             
            </>
         

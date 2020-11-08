@@ -223,7 +223,7 @@ export class ResumeForm extends Component {
         step: step + 2
     })
    }
-   handleToggleChange = (index, event) => {  
+   handleTogglesChange = (index, event) => {  
        const workExperience = [...this.state.workExperience]
        workExperience[index][event.target.name] = event.target.checked
     this.setState({
@@ -416,7 +416,7 @@ export class ResumeForm extends Component {
                     add={this.addMoreWork}
                     summary={this.handleWorkExperienceSummary}
                     handleWorkExperience={this.handleWorkExperience}
-                    current={this.handleToggleChange}
+                    current={this.handleTogglesChange}
                     prevStep={this.prevStep}
                     states={this.state}/>
                 )

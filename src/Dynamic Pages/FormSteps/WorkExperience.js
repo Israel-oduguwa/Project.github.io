@@ -261,7 +261,7 @@ export class WorkExperience extends Component {
         }}
       />:
       <TextField
-                style={{visibility:"hidden"}}      
+               disabled      
         id="date2"
         label={ !inputField.current ? "End Date" : "Disabled" }
         type="date"

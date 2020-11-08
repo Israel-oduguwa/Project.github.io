@@ -13,7 +13,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Personal from "./summary.svg";
 import IconButton from '@material-ui/core/IconButton';
 import MobileStepper from '@material-ui/core/MobileStepper';
-
+import {Helmet} from "react-helmet";
 
 
 const styles = (theme) =>({
@@ -45,6 +45,11 @@ export class Profile extends Component {
             prevStep, nextStep, handleProfile} = this.props
         return (
             <>
+             <Helmet>
+               
+               <title>Professional Summary - React app</title>
+               
+           </Helmet>
            <div className="form-Bar">
            <ProgressBar  
             color="#6520ec"
