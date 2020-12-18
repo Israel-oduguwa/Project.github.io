@@ -49,7 +49,7 @@ export class Skills extends Component {
         const { classes} = this.props;
         const { states,addSkills, skillInput,
           handleToggle,
-            prevStep, nextStep, delSkills, valuetext } = this.props
+            prevStep, nextStep, delSkills } = this.props
         return (
            <>
             <Helmet>

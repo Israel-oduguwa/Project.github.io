@@ -70,7 +70,7 @@ export class StaticNavbarLinks extends Component {
                   <Typography className="navBarLinks" component={Link} to="/register"  variant="body1" color="inherit" noWrap>
            Registar
           </Typography>
-                  <Typography className="navBarLinks" component={Link} to="/singIn"  variant="body1" color="inherit" noWrap>
+                  <Typography className="navBarLinks" component={Link} to="/signin"  variant="body1" color="inherit" noWrap>
           Signin
           </Typography>
           {/* <button onClick={darkModes}>DarkMode</button> */}

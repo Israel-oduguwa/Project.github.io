@@ -114,64 +114,7 @@ export default ({props, children})=> {
    
     <Container style={{ width: "100%", marginTop:"5vh", overflow: "hidden" }}>
       <Box my={2}>
-        {children}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+        {children}        
       </Box>
     </Container>
     <ScrollTop {...props}>

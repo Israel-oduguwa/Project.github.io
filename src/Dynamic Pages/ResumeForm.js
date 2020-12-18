@@ -9,13 +9,13 @@ import ProfileTips from "./FormSteps/ProfileTips";
 import Profile from "./FormSteps/Profile";
 import ChooseTemplates from "./FormSteps/ChooseTemplates";
 import Extra from "./FormSteps/Extra";
-import { EditorState } from 'draft-js';
 import StartLoad from "./FormSteps/StartLoad";
 export class ResumeForm extends Component {
     state={ 
             step: 1,  
             Loading:true,               
             firstName:"",
+            profileImage:"https://firebasestorage.googleapis.com/v0/b/friendme-8be4c.appspot.com/o/177301763352.jpg?alt=media&token=363407fa-563d-462d-98a3-7072f10e1206",
             auth:false,
             lastName:"",
             profession:"",       
@@ -119,7 +119,15 @@ export class ResumeForm extends Component {
                 workExperience:workExperience,
                 education:education,
                 skills:skills,
-                profile:profile
+                profile:profile,
+                addRating:addRating,
+                accomplishments:accomplishments,
+                accomplished:accomplished,
+                certifications:certifications,
+                certified:certified,
+                projects:projects,
+                projectsToggle:projectToggle
+
             })
           } else{
              this.setState({
